@@ -44,16 +44,20 @@ public class Main {
                     System.out.println("Visar alla pokemons");
                     //showAllPokemons.readPokemons();
                     FileHandler.readFile();
+                    pokedexServices.showAllPokemons();
                 }
                 case 2 -> {
                     System.out.println("Visar alla värdem som måste fyllas in för att skapa en ny pokemon");
+                    pokedexServices.addPokemon();
                 }
                 case 3 -> {
                     System.out.println("Visar en lista lista på alla pokemons");
                     System.out.println("Använder väljer pokemons, skriver vilka siffra som ska bort");
+                    pokedexServices.removePokemon();
                 }
                 case 4 -> {
                     System.out.println("Uppdatera en pokemon");
+                    pokedexServices.updatePokemon();
                 }
                 case 5 -> {
                     System.out.println("Raderar alla pokemons och ersätter med seed data, dvs 5st pokemons");
