@@ -3,4 +3,5 @@ public class Attack {
     private int baseDamage;
     private int accuracy;
     private Type type;
+
 }

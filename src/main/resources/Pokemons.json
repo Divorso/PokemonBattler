@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Testpokemon",
+    "maxHP" : 100,
+    "currentHP": 50,
+    "type": "testtype",
+    "attacks": [
+      {
+        "attackName": "testAttack",
+        "attackDamage": 100,
+        "accuracy": 40,
+        "type": "testtype"
+      }
+    ]
+  }
+]
