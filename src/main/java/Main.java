@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.logging.FileHandler;
 
 public class Main {
 
@@ -43,7 +42,8 @@ public class Main {
             switch (userChoice) {
                 case 1 -> {
                     System.out.println("Visar alla pokemons");
-                    showAllPokemons.readPokemons();
+                    //showAllPokemons.readPokemons();
+                    FileHandler.readFile();
                 }
                 case 2 -> {
                     System.out.println("Visar alla värdem som måste fyllas in för att skapa en ny pokemon");
