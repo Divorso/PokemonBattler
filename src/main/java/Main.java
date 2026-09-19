@@ -43,7 +43,7 @@ public class Main {
                 case 1 -> {
                     System.out.println("Visar alla pokemons");
                     //showAllPokemons.readPokemons();
-                    FileHandler.readFile();
+                    //FileHandler.readFile();
                     pokedexServices.showAllPokemons();
                 }
                 case 2 -> {
