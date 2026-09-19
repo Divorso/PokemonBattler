@@ -41,7 +41,7 @@ public class Main {
 
             switch (userChoice) {
                 case 1 -> {
-                    System.out.println("Visar alla pokemons");
+                    //System.out.println("Visar alla pokemons");
                     //showAllPokemons.readPokemons();
                     //FileHandler.readFile();
                     pokedexServices.showAllPokemons();

@@ -3,13 +3,13 @@
     "name": "Testpokemon",
     "maxHP" : 100,
     "currentHP": 50,
-    "type": "testtype",
+    "type": "Fire",
     "attacks": [
       {
         "attackName": "testAttack",
-        "attackDamage": 100,
+        "baseDamage": 100,
         "accuracy": 40,
-        "type": "testtype"
+        "type": "Fire"
       }
     ]
   }

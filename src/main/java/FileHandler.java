@@ -26,13 +26,13 @@ public class FileHandler {
 
         InputStream input = FileHandler.class
                 .getResourceAsStream("/Pokemons.json");
-        System.out.println(input);
+        //System.out.println(input);
 
         String json = new String(
                 input.readAllBytes(),
                 StandardCharsets.UTF_8
         );
-        System.out.println(json);
+        //System.out.println(json);
 
         return json;
     }

@@ -5,7 +5,9 @@ public class pokedexServices {
     public static void showAllPokemons() throws IOException{
         System.out.println("Shows all pokemon");
         ArrayList<Pokemon> pokemons = FileHandler.loadPokemons();
-        System.out.println("Antal Pokemons: " + pokemons.size());
+        //System.out.println("Antal Pokemons: " + pokemons.size());
+        System.out.println(pokemons.get(0).getName());
+
     }
     public static void addPokemon(){
         System.out.println("Adds pokemons");
