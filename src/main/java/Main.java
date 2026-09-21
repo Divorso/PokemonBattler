@@ -19,8 +19,7 @@ public class Main {
                     Graphics.getEndRowGraphics();
                 }
                 case 2 -> {
-                    System.out.println("Visar alla värdem som måste fyllas in för att skapa en ny pokemon");
-                    pokedexServices.addPokemon();
+                    pokedexServices.addPokemon(pokemonArray, scanner);
                 }
                 case 3 -> {
                     System.out.println("Visar en lista lista på alla pokemons");

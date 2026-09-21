@@ -81,4 +81,11 @@ public class Graphics {
             System.out.println("5) Radera alla Pokemon och gå tillbaka till seed data");
             System.out.println("6) Spara och avsluta spelet");
         }
+        public static void getAttackGraphics(){
+            System.out.println("""
+                ======================================================================
+                ==================  Add attack to your Pokemon  ======================
+                ======================================================================
+                """);
+        }
 }
