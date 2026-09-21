@@ -5,45 +5,13 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("""
-                                                  ,'\\
-                    _.----.        ____         ,'  _\\   ___    ___     ____
-                _,-'       `.     |    |  /`.   \\,-'    |   \\  /   |   |    \\  |`.
-                \\      __    \\    '-.  | /   `.  ___    |    \\/    |   '-.   \\ |  |
-                 \\.    \\ \\   |  __  |  |/    ,','_  `.  |          | __  |    \\|  |
-                   \\    \\/   /,' _`.|      ,' / / / /   |          ,' _`.|     |  |
-                    \\     ,-'/  /   \\    ,'   | \\/ / ,`.|         /  /   \\  |     |
-                     \\    \\ |   \\_/  |   `-.  \\    `'  /|  |    ||   \\_/  | |\\    |
-                      \\    \\ \\      /       `-.`.___,-' |  |\\  /| \\      /  | |   |
-                       \\    \\ `.__,'|  |`-._    `|      |__| \\/ |  `.__,'|  | |   |
-                        \\_.-'       |__|    `-._ |              '-.|     '-.| |   |
-                                                `'                            '-._|
-                """);
-        System.out.println("""
-                =================================================================
-                ===================Welcome to the PokeIndex======================
-                =================================================================""");
-
-
-
-
+        Graphics.getIntroGraphics();
         boolean isRunning = true;
         while (isRunning){
-            System.out.println("Välj en av följande: ");
-            System.out.println("1) Visa alla Pokemons");
-            System.out.println("2) Lägg till en Pokemon");
-            System.out.println("3) Ta bort en Pokemon");
-            System.out.println("4) Uppdatera en pokemon");
-            System.out.println("5) Radera alla Pokemon och gå tillbaka till seed data");
-            System.out.println("6) Spara och avsluta spelet");
+            Graphics.getUserOptionsGraphics();
             int userChoice = scanner.nextInt();
-
-
             switch (userChoice) {
                 case 1 -> {
-                    //System.out.println("Visar alla pokemons");
-                    //showAllPokemons.readPokemons();
-                    //FileHandler.readFile();
                     pokedexServices.showAllPokemons();
                 }
                 case 2 -> {

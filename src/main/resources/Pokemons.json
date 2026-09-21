@@ -1,15 +1,121 @@
 [
   {
-    "name": "Testpokemon",
-    "maxHP" : 100,
-    "currentHP": 50,
-    "type": "Fire",
+    "name": "Charmander",
+    "maxHP": 100,
+    "currentHP": 100,
+    "type": "FIRE",
     "attacks": [
       {
-        "attackName": "testAttack",
-        "baseDamage": 100,
-        "accuracy": 40,
-        "type": "Fire"
+        "attackName": "Ember",
+        "baseDamage": 40,
+        "accuracy": 90,
+        "type": "FIRE"
+      },
+      {
+        "attackName": "Scratch",
+        "baseDamage": 25,
+        "accuracy": 100,
+        "type": "PHYSICAL"
+      }
+    ]
+  },
+  {
+    "name": "Squirtle",
+    "maxHP": 120,
+    "currentHP": 120,
+    "type": "WATER",
+    "attacks": [
+      {
+        "attackName": "Water Gun",
+        "baseDamage": 45,
+        "accuracy": 90,
+        "type": "WATER"
+      },
+      {
+        "attackName": "Tackle",
+        "baseDamage": 25,
+        "accuracy": 100,
+        "type": "PHYSICAL"
+      }
+    ]
+  },
+  {
+    "name": "Bulbasaur",
+    "maxHP": 110,
+    "currentHP": 110,
+    "type": "GRASS",
+    "attacks": [
+      {
+        "attackName": "Vine Whip",
+        "baseDamage": 45,
+        "accuracy": 90,
+        "type": "GRASS"
+      },
+      {
+        "attackName": "Tackle",
+        "baseDamage": 25,
+        "accuracy": 100,
+        "type": "PHYSICAL"
+      }
+    ]
+  },
+  {
+    "name": "Pikachu",
+    "maxHP": 90,
+    "currentHP": 90,
+    "type": "ELECTRIC",
+    "attacks": [
+      {
+        "attackName": "Thunder Shock",
+        "baseDamage": 50,
+        "accuracy": 85,
+        "type": "ELECTRIC"
+      },
+      {
+        "attackName": "Quick Attack",
+        "baseDamage": 30,
+        "accuracy": 100,
+        "type": "PHYSICAL"
+      }
+    ]
+  },
+  {
+    "name": "Eevee",
+    "maxHP": 105,
+    "currentHP": 105,
+    "type": "PHYSICAL",
+    "attacks": [
+      {
+        "attackName": "Quick Attack",
+        "baseDamage": 30,
+        "accuracy": 100,
+        "type": "PHYSICAL"
+      },
+      {
+        "attackName": "Tackle",
+        "baseDamage": 25,
+        "accuracy": 100,
+        "type": "PHYSICAL"
+      }
+    ]
+  },
+  {
+    "name": "Vulpix",
+    "maxHP": 95,
+    "currentHP": 95,
+    "type": "FIRE",
+    "attacks": [
+      {
+        "attackName": "Ember",
+        "baseDamage": 40,
+        "accuracy": 90,
+        "type": "FIRE"
+      },
+      {
+        "attackName": "Quick Attack",
+        "baseDamage": 30,
+        "accuracy": 100,
+        "type": "PHYSICAL"
       }
     ]
   }
