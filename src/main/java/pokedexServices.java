@@ -1,28 +1,14 @@
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class pokedexServices {
-
-    public static void showAllPokemons() throws IOException{
-        ArrayList<Pokemon> pokemons = FileHandler.loadPokemons();;
-        System.out.println("**************************************************");
-        System.out.println("**************************************************");
-        System.out.println("**************************************************");
-        System.out.println("**************************************************");
-        System.out.println("_________________Dina pokemons:___________________");
-        for(Pokemon pokemon : pokemons){
+    public static void showAllPokemons(ArrayList<Pokemon> pokemonArray){
+        for(Pokemon pokemon : pokemonArray){
             System.out.println(pokemon.getName());
         };
-        System.out.println("__________________________________________________");
-        System.out.println("**************************************************");
-        System.out.println("**************************************************");
-        System.out.println("**************************************************");
-        System.out.println("**************************************************");
-
-
     }
     public static void addPokemon(){
-        System.out.println("Adds pokemons");
+        Graphics.getAddPokemonGraphics();
+
 
     }
     public static void removePokemon(){

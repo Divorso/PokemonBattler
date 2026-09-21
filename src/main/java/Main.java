@@ -1,10 +1,12 @@
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
+        ArrayList<Pokemon> pokemonArray = FileHandler.loadPokemons();
         Graphics.getIntroGraphics();
         boolean isRunning = true;
         while (isRunning){
@@ -12,7 +14,9 @@ public class Main {
             int userChoice = scanner.nextInt();
             switch (userChoice) {
                 case 1 -> {
-                    pokedexServices.showAllPokemons();
+                    Graphics.getPokemonListGraphics();
+                    pokedexServices.showAllPokemons(pokemonArray);
+                    Graphics.getEndRowGraphics();
                 }
                 case 2 -> {
                     System.out.println("Visar alla värdem som måste fyllas in för att skapa en ny pokemon");
