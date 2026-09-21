@@ -12,6 +12,7 @@ public class Main {
         while (isRunning){
             Graphics.getUserOptionsGraphics();
             int userChoice = scanner.nextInt();
+            scanner.nextLine();
             switch (userChoice) {
                 case 1 -> {
                     Graphics.getPokemonListGraphics();

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class pokedexServices {
@@ -8,21 +9,24 @@ public class pokedexServices {
         };
     }
     public static void addPokemon(ArrayList<Pokemon> pokemonArray, Scanner scanner){
+        System.out.println("");
         Graphics.getAddPokemonGraphics();
         System.out.print("----Vad ska din Pokemon heta----: ");
         String name = scanner.nextLine();
-        scanner.nextLine();
+
         System.out.print("----Vad är maxHP på din Pokemon----: ");
         int maxHP = scanner.nextInt();
         scanner.nextLine();
+
         System.out.println("--Vad är din Pokemon för typ välj mellan--");
-        System.out.println("(PHYSICAL, FIRE, ICE, WATER, ELECTRIC, GRASS)");
+        System.out.print("(PHYSICAL, FIRE, ICE, WATER, ELECTRIC, GRASS):");
         String type = scanner.nextLine();
-        scanner.nextLine();
+
         System.out.println("----Hur många attacker har din Pokemon?----");
-        System.out.print("----(Du får ha mellan 1-4 attacker)----");
+        System.out.print("----(Du får ha mellan 1-4 attacker)----: ");
         int amountAttacks = scanner.nextInt();
         scanner.nextLine();
+        ArrayList<Attack> attackArray = new ArrayList<>();
         for(int i = 0; i < amountAttacks; i++ ){
             Graphics.getAttackGraphics();
             String numberToText = "";
@@ -41,10 +45,17 @@ public class pokedexServices {
             scanner.nextLine();
             System.out.println("Vad är det för typ av Pokemon?");
             System.out.print("(PHYSICAL, FIRE, ICE, WATER, ELECTRIC, GRASS): ");
-            String typeAttack = scanner.nextLine();
+            Type typeAttack = Type.valueOf(scanner.nextLine().toUpperCase());
+
+            Attack newAttack = new Attack();
+            newAttack.setAttackName(attackName);
+            newAttack.setBaseDamage(attackDamage);
+            newAttack.setAccuracy(accuracy);
+            newAttack.setType(typeAttack);
+            attackArray.add(newAttack);
+            System.out.println(attackArray);
         }
-
-
+        Graphics.getPokemonCreatedGraphics();
     }
     public static void removePokemon(){
         System.out.println("removes pokemon");
