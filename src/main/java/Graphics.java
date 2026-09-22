@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Graphics {
         public static void getIntroGraphics() {
             System.out.println("""
@@ -94,5 +96,17 @@ public class Graphics {
                 ==================  Your Pokemon have been created  ==================
                 ======================================================================
                     """);
+        }
+        public static boolean getReturnInMenu(Scanner scanner) {
+
+            while (true) {
+                System.out.print("Skriv B för att backa: ");
+                String input = scanner.nextLine();
+
+                if (input.equalsIgnoreCase("b")) {
+                    return true;
+                }
+                System.out.println("Fel val.");
+            }
         }
 }

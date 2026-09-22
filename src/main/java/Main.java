@@ -17,6 +17,7 @@ public class Main {
                 case 1 -> {
                     Graphics.getPokemonListGraphics();
                     pokedexServices.showAllPokemons(pokemonArray);
+                    Graphics.getReturnInMenu(scanner);
                     Graphics.getEndRowGraphics();
                 }
                 case 2 -> {

@@ -1,32 +1,31 @@
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class pokedexServices {
     public static void showAllPokemons(ArrayList<Pokemon> pokemonArray){
         for(Pokemon pokemon : pokemonArray){
-            System.out.println(pokemon.getName());
+
+            System.out.printf("Namn: %s, max HP: %d, nuvarande HP %d, Pokemon typ: %s \n",
+                    pokemon.getName(),pokemon.getMaxHP(),pokemon.getCurrentHP(),pokemon.getType());
         };
     }
     public static void addPokemon(ArrayList<Pokemon> pokemonArray, Scanner scanner){
         System.out.println("");
         Graphics.getAddPokemonGraphics();
         System.out.print("----Vad ska din Pokemon heta----: ");
-        String name = scanner.nextLine();
+        String name = ErrorHandelingService.checkNameLettersOnly(scanner);
 
-        System.out.print("----Vad är maxHP på din Pokemon----: ");
-        int maxHP = scanner.nextInt();
-        scanner.nextLine();
+        System.out.println("----Vad är maxHP på din Pokemon----");
+        System.out.print("----(1-500)----: ");
+        int maxHP = ErrorHandelingService.checkIntMinMax(scanner,1,500);
 
         System.out.println("--Vad är din Pokemon för typ välj mellan--");
-        System.out.print("(PHYSICAL, FIRE, ICE, WATER, ELECTRIC, GRASS):");
-        String type = scanner.nextLine();
+        System.out.print("(PHYSICAL, FIRE, ICE, WATER, ELECTRIC, GRASS): ");
+        Type type = ErrorHandelingService.checkType(scanner);
 
         System.out.println("----Hur många attacker har din Pokemon?----");
         System.out.print("----(Du får ha mellan 1-4 attacker)----: ");
-        int amountAttacks = scanner.nextInt();
-        scanner.nextLine();
-        ArrayList<Attack> attackArray = new ArrayList<>();
+        int amountAttacks = ErrorHandelingService.checkIntMinMax(scanner,1,4 );
         for(int i = 0; i < amountAttacks; i++ ){
             Graphics.getAttackGraphics();
             String numberToText = "";
@@ -36,24 +35,33 @@ public class pokedexServices {
                 case 2 -> numberToText = "tredje";
                 case 3 -> numberToText = "fjärde";
             }
-            System.out.printf("Vad heter din %s attack: ", numberToText);
-            String attackName = scanner.nextLine();
+            System.out.printf("Vad heter din %s attacken: ", numberToText);
+            String attackName = ErrorHandelingService.checkNameLettersOnly(scanner);
             System.out.print("Hur mycket skada gör den (1-40): ");
-            int attackDamage = scanner.nextInt();
+            int attackDamage = ErrorHandelingService.checkIntMinMax(scanner,1,40);
             System.out.print("Hur träffsäker är den (1-100): ");
-            int accuracy = scanner.nextInt();
-            scanner.nextLine();
-            System.out.println("Vad är det för typ av Pokemon?");
+            int accuracy = ErrorHandelingService.checkIntMinMax(scanner,1,100);
+            System.out.println("Vad är det för typ av attack?");
             System.out.print("(PHYSICAL, FIRE, ICE, WATER, ELECTRIC, GRASS): ");
-            Type typeAttack = Type.valueOf(scanner.nextLine().toUpperCase());
+            Type typeAttack = ErrorHandelingService.checkType(scanner);
 
+            //lägger till ny pokemon
+            Pokemon newPokemon = new Pokemon();
+            newPokemon.setName(name);
+            newPokemon.setMaxHP(maxHP);
+            newPokemon.setCurrentHP(maxHP);
+            newPokemon.setType(type);
+            //lägger till ny attack
+            ArrayList<Attack> attackArray = new ArrayList<>();
             Attack newAttack = new Attack();
             newAttack.setAttackName(attackName);
             newAttack.setBaseDamage(attackDamage);
             newAttack.setAccuracy(accuracy);
             newAttack.setType(typeAttack);
             attackArray.add(newAttack);
-            System.out.println(attackArray);
+            newPokemon.setAttacks(attackArray);
+
+            pokemonArray.add(newPokemon);
         }
         Graphics.getPokemonCreatedGraphics();
     }
