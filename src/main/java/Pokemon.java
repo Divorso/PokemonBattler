@@ -48,6 +48,6 @@ public class Pokemon {
     }
 
     public void setAttacks(ArrayList<Attack> attacks) {
-        this.attacks = new ArrayList<>();
+        this.attacks = attacks;
     }
 }

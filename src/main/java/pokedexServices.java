@@ -1,3 +1,5 @@
+import jdk.swing.interop.SwingInterOpUtils;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,6 +13,17 @@ public class pokedexServices {
                 for(Pokemon pokemon : pokemonArray){
                     System.out.printf("Namn: %s, max HP: %d, nuvarande HP %d, Pokemon typ: %s \n",
                             pokemon.getName(),pokemon.getMaxHP(),pokemon.getCurrentHP(),pokemon.getType());
+                    /*
+                    for(Attack attack : pokemon.getAttacks()){
+                        System.out.printf("Attack name: %s, base damage: %d, accuracy: %d, attack: %s\n",
+                                attack.getAttackName(),
+                                attack.getBaseDamage(),
+                                attack.getAccuracy(),
+                                attack.getType()
+                        );
+                    }
+
+                     */
                 }
 
             } else if (choice.equalsIgnoreCase("name")) {
@@ -35,11 +48,19 @@ public class pokedexServices {
         System.out.print("(PHYSICAL, FIRE, ICE, WATER, ELECTRIC, GRASS): ");
         Type type = ErrorHandelingService.checkType(scanner);
 
+        //lägger till ny pokemon
+        Pokemon newPokemon = new Pokemon();
+        newPokemon.setName(name);
+        newPokemon.setMaxHP(maxHP);
+        newPokemon.setCurrentHP(maxHP);
+        newPokemon.setType(type);
+
         System.out.println("----Hur många attacker har din Pokemon?----");
         System.out.print("----(Du får ha mellan 1-4 attacker)----: ");
         int amountAttacks = ErrorHandelingService.checkIntMinMax(scanner,1,4 );
+        ArrayList<Attack> attackArray = new ArrayList<>();
         for(int i = 0; i < amountAttacks; i++ ){
-            Graphics.getEmptySpace(20);
+            Graphics.getEmptySpace(25);
             Graphics.getAttackGraphics();
             String numberToText = "";
             switch (i){
@@ -58,24 +79,17 @@ public class pokedexServices {
             System.out.print("(PHYSICAL, FIRE, ICE, WATER, ELECTRIC, GRASS): ");
             Type typeAttack = ErrorHandelingService.checkType(scanner);
 
-            //lägger till ny pokemon
-            Pokemon newPokemon = new Pokemon();
-            newPokemon.setName(name);
-            newPokemon.setMaxHP(maxHP);
-            newPokemon.setCurrentHP(maxHP);
-            newPokemon.setType(type);
             //lägger till ny attack
-            ArrayList<Attack> attackArray = new ArrayList<>();
             Attack newAttack = new Attack();
             newAttack.setAttackName(attackName);
             newAttack.setBaseDamage(attackDamage);
             newAttack.setAccuracy(accuracy);
             newAttack.setType(typeAttack);
             attackArray.add(newAttack);
-            newPokemon.setAttacks(attackArray);
 
-            pokemonArray.add(newPokemon);
         }
+        pokemonArray.add(newPokemon);
+        newPokemon.setAttacks(attackArray);
         Graphics.getPokemonCreatedGraphics();
     }
     public static void removePokemon(Scanner scanner, ArrayList<Pokemon> pokemonArray){
@@ -118,12 +132,64 @@ public class pokedexServices {
             for (int i = 0; i < pokemonArray.size(); ++i) {
                 if (pokemonArray.get(i).getName().equalsIgnoreCase(pokemonToEdit)) {
                     System.out.printf("Vad vill du döpa %s om till: ", pokemonArray.get(i).getName());
-                    System.out.printf("Vad blir %s nya MAX HP: ", pokemonArray.get(i).getMaxHP());
-                    System.out.printf("Vad blir %s nya 'typ': ", pokemonArray.get(i).getType());
-                    System.out.printf("");
-                    System.out.printf("");
-                    System.out.printf("");
+                    String updatedName = ErrorHandelingService.checkNameLettersOnly(scanner);
 
+                    System.out.printf("Nuvarande MAX HP är %d, vad blir nya MAX HP \n", pokemonArray.get(i).getMaxHP());
+                    System.out.print("----(1-500)----: ");
+                    int updateMaxHP = ErrorHandelingService.checkIntMinMax(scanner,1, 500);
+
+                    System.out.printf("Nuvarande typ är '%s' vad blir nya nya 'typ': ", pokemonArray.get(i).getType());
+                    Type updatedType = ErrorHandelingService.checkType(scanner);
+
+                    pokemonArray.get(i).setName(updatedName);
+                    pokemonArray.get(i).setMaxHP(updateMaxHP);
+                    pokemonArray.get(i).setType(updatedType);
+
+
+                    System.out.println("Vill du uppdatera attackerna?");
+                    System.out.print("Y/N? (N = behåller tidigare attacker): ");
+                    String userChoice = ErrorHandelingService.checkNameLettersOnly(scanner);
+                    if(userChoice.equalsIgnoreCase("y")){
+                        for(int y = 0; y < pokemonArray.get(i).getAttacks().size(); y++ ){
+                            Graphics.getEmptySpace(20);
+                            Graphics.getUpdatedAttackGraphics();
+                            String numberToText = "";
+                            switch (y){
+                                case 0 -> numberToText = "första";
+                                case 1 -> numberToText = "andra";
+                                case 2 -> numberToText = "tredje";
+                                case 3 -> numberToText = "fjärde";
+                            }
+                            System.out.printf("----Updatering av din %s attack----\n", numberToText);
+
+                            System.out.printf("Din nuvarande attack heter %s, vad vill du döpa om den till: ",
+                                    pokemonArray.get(i).getAttacks().get(y).getAttackName());
+                            String updatedAttackName = ErrorHandelingService.checkNameLettersOnly(scanner);
+
+                            System.out.printf("Din nuvarande bas skada är %d, vad vill du uppdatera den till: \n",
+                                    pokemonArray.get(i).getAttacks().get(y).getBaseDamage());
+                            System.out.print("----(1-40)----: ");
+                            int updatedBaseDamage = ErrorHandelingService.checkIntMinMax(scanner,1,40);
+
+                            System.out.printf("Din nuvarande träffsäkerhet är %d, vad vill du uppdatera den till: \n",
+                                    pokemonArray.get(i).getAttacks().get(y).getAccuracy());
+                            System.out.print("----(1-100)----: ");
+                            int updatedAccuracy = ErrorHandelingService.checkIntMinMax(scanner,1,100);
+
+                            System.out.printf("Din nuvarande attack typ är %s, vad vill du uppdatera den till: ",
+                                    pokemonArray.get(i).getAttacks().get(y).getType());
+                            Type updatedAttackType = ErrorHandelingService.checkType(scanner);
+
+                            pokemonArray.get(i).getAttacks().get(y).setAttackName(updatedAttackName);
+                            pokemonArray.get(i).getAttacks().get(y).setBaseDamage(updatedBaseDamage);
+                            pokemonArray.get(i).getAttacks().get(y).setAccuracy(updatedAccuracy);
+                            pokemonArray.get(i).getAttacks().get(y).setType(updatedType);
+
+
+                        }
+                    }else {
+                        System.out.println("behåller gamla attacker");
+                    }
                 }
             }
         }

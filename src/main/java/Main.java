@@ -35,7 +35,6 @@ public class Main {
                 case 4 -> {
                     Graphics.getEmptySpace(20);
                     Graphics.getUpdatePokemonGraphics();
-                    System.out.println("Uppdatera en pokemon");
                     pokedexServices.updatePokemon(scanner,pokemonArray);
                 }
                 case 5 -> {
