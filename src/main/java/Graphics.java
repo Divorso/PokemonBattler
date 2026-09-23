@@ -76,12 +76,14 @@ public class Graphics {
         }
         public static void getUserOptionsGraphics(){
             System.out.println("Välj en av följande: ");
-            System.out.println("1) Visa alla Pokemons");
+            System.out.println("1) Visa alla Pokemon");
             System.out.println("2) Lägg till en Pokemon");
             System.out.println("3) Ta bort en Pokemon");
             System.out.println("4) Uppdatera en pokemon");
-            System.out.println("5) Radera alla Pokemon och gå tillbaka till seed data");
-            System.out.println("6) Spara och avsluta spelet");
+            System.out.println("5) Ladda från fil");
+            System.out.println("7) Spara till fil");
+            System.out.println("8) Radera alla Pokemon och gå tillbaka till seed data");
+            System.out.println("9) Avsluta spelet");
         }
         public static void getAttackGraphics(){
             System.out.println("""
@@ -108,5 +110,11 @@ public class Graphics {
                 }
                 System.out.println("Fel val.");
             }
+        }
+        public static void getEmptySpace(int number){
+            for(int i = 0; i < number; i++){
+                System.out.println(" ");
+            }
+
         }
 }

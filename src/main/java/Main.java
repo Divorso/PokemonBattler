@@ -7,37 +7,49 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Pokemon> pokemonArray = FileHandler.loadPokemons();
-        Graphics.getIntroGraphics();
+        System.out.println(pokemonArray.getFirst());
+        pokemonArray.contains("Charmander");
         boolean isRunning = true;
         while (isRunning){
+            Graphics.getIntroGraphics();
             Graphics.getUserOptionsGraphics();
             int userChoice = scanner.nextInt();
             scanner.nextLine();
             switch (userChoice) {
                 case 1 -> {
+                    Graphics.getEmptySpace(20);
                     Graphics.getPokemonListGraphics();
-                    pokedexServices.showAllPokemons(pokemonArray);
+                    pokedexServices.showAllPokemons(pokemonArray,"all");
                     Graphics.getReturnInMenu(scanner);
-                    Graphics.getEndRowGraphics();
+                    Graphics.getEmptySpace(20);
                 }
                 case 2 -> {
+                    Graphics.getEmptySpace(20);
                     pokedexServices.addPokemon(pokemonArray, scanner);
                 }
                 case 3 -> {
-                    System.out.println("Visar en lista lista på alla pokemons");
-                    System.out.println("Använder väljer pokemons, skriver vilka siffra som ska bort");
-                    pokedexServices.removePokemon();
+                    Graphics.getEmptySpace(20);
+                    Graphics.getRemovePokemonGrahpics();
+                    pokedexServices.removePokemon(scanner, pokemonArray);
                 }
                 case 4 -> {
+                    Graphics.getEmptySpace(20);
+                    Graphics.getUpdatePokemonGraphics();
                     System.out.println("Uppdatera en pokemon");
-                    pokedexServices.updatePokemon();
+                    pokedexServices.updatePokemon(scanner,pokemonArray);
                 }
                 case 5 -> {
                     System.out.println("Raderar alla pokemons och ersätter med seed data, dvs 5st pokemons");
                 }
                 case 6 -> {
+                    System.out.println("Spara till fil");
+                }
+                case 7 -> {
+                    System.out.println("Ladda från fil");
+                }
+                case 8 -> {
                     System.out.println("Sparar spelet och avslutar");
-                    isRunning = false;
+                    //isRunning = false;
                 }
                 default -> {
                     System.out.println("Obs välj mellan 1-6");

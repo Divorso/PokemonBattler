@@ -1,4 +1,4 @@
-import java.util.InputMismatchException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ErrorHandelingService {
@@ -38,6 +38,28 @@ public class ErrorHandelingService {
             }catch (InvalidTypeException e){
                 System.out.println(e.getMessage());
                 System.out.print("Välj mellan PHYSICAL, FIRE, ICE, WATER, ELECTRIC ELLER GRASS: ");
+            }
+        }
+    }
+    public static String checkForPokemon(Scanner scanner, ArrayList<Pokemon> pokemonArray) {
+
+        while (true) {
+            String userInput = checkNameLettersOnly(scanner).trim();
+            try {
+                if(userInput.equalsIgnoreCase("b")){
+                    return userInput;
+                }
+
+                for (Pokemon pokemon : pokemonArray) {
+
+                    if (pokemon.getName().equalsIgnoreCase(userInput)) {
+                        return userInput;
+                    }
+                }
+                throw new InvalidPokemonException();
+
+            } catch (InvalidPokemonException e) {
+                System.out.printf("Hittar ingen Pokemon som heter %s, testa igen eller skriv 'b' för att backa: ", userInput);
             }
         }
     }

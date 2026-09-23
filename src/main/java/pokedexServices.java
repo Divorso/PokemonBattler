@@ -2,12 +2,24 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class pokedexServices {
-    public static void showAllPokemons(ArrayList<Pokemon> pokemonArray){
-        for(Pokemon pokemon : pokemonArray){
+    public static void showAllPokemons(ArrayList<Pokemon> pokemonArray, String choice){
 
-            System.out.printf("Namn: %s, max HP: %d, nuvarande HP %d, Pokemon typ: %s \n",
-                    pokemon.getName(),pokemon.getMaxHP(),pokemon.getCurrentHP(),pokemon.getType());
-        };
+        if(pokemonArray.size() == 0){
+            System.out.println("Du har inga Pokemon");
+        } else {
+            if(choice.equalsIgnoreCase("all")){
+                for(Pokemon pokemon : pokemonArray){
+                    System.out.printf("Namn: %s, max HP: %d, nuvarande HP %d, Pokemon typ: %s \n",
+                            pokemon.getName(),pokemon.getMaxHP(),pokemon.getCurrentHP(),pokemon.getType());
+                }
+
+            } else if (choice.equalsIgnoreCase("name")) {
+                for(Pokemon pokemon : pokemonArray){
+                    System.out.printf("Namn: %s \n", pokemon.getName());
+                }
+            }
+
+        }
     }
     public static void addPokemon(ArrayList<Pokemon> pokemonArray, Scanner scanner){
         System.out.println("");
@@ -27,6 +39,7 @@ public class pokedexServices {
         System.out.print("----(Du får ha mellan 1-4 attacker)----: ");
         int amountAttacks = ErrorHandelingService.checkIntMinMax(scanner,1,4 );
         for(int i = 0; i < amountAttacks; i++ ){
+            Graphics.getEmptySpace(20);
             Graphics.getAttackGraphics();
             String numberToText = "";
             switch (i){
@@ -65,11 +78,56 @@ public class pokedexServices {
         }
         Graphics.getPokemonCreatedGraphics();
     }
-    public static void removePokemon(){
-        System.out.println("removes pokemon");
+    public static void removePokemon(Scanner scanner, ArrayList<Pokemon> pokemonArray){
+        if(pokemonArray.size() == 0){
+            System.out.println("Du har inga Pokemon att ta bort");
+            Graphics.getReturnInMenu(scanner);
+        } else {
+            showAllPokemons(pokemonArray, "name");
+            System.out.println("Vilken Pokemon vill du ta bort?");
+            System.out.println("Skriv B för att backa");
+            System.out.print("Pokemon: ");
+            String pokemonToRemove = ErrorHandelingService.checkForPokemon(scanner,pokemonArray);
+            if(!pokemonToRemove.equalsIgnoreCase("b")){
+                for (int i = 0; i < pokemonArray.size(); i++) {
+
+                    if (pokemonArray.get(i).getName().equalsIgnoreCase(pokemonToRemove)) {
+                        System.out.printf("Är du säker på att du vill ta bort %s \n", pokemonToRemove);
+                        System.out.print("Y/N: ");
+                        String userChoice = ErrorHandelingService.checkNameLettersOnly(scanner);
+                        if (userChoice.equalsIgnoreCase("Y")){
+                            pokemonArray.remove(i);
+                            System.out.println("Pokemon borttagen!");
+                            return;
+                        } else {
+                            System.out.println("Fel val");
+                        }
+                    }
+                }
+            }
+
+        }
+
+
     }
-    public static void updatePokemon(){
-        System.out.println("update pokemon");
+    public static void updatePokemon(Scanner scanner, ArrayList<Pokemon> pokemonArray){
+        showAllPokemons(pokemonArray,"name");
+        System.out.print("Vilken Pokemon vill du uppdatera: ");
+        String pokemonToEdit = ErrorHandelingService.checkForPokemon(scanner,pokemonArray);
+        if(!pokemonToEdit.equalsIgnoreCase("b")) {
+            for (int i = 0; i < pokemonArray.size(); ++i) {
+                if (pokemonArray.get(i).getName().equalsIgnoreCase(pokemonToEdit)) {
+                    System.out.printf("Vad vill du döpa %s om till: ", pokemonArray.get(i).getName());
+                    System.out.printf("Vad blir %s nya MAX HP: ", pokemonArray.get(i).getMaxHP());
+                    System.out.printf("Vad blir %s nya 'typ': ", pokemonArray.get(i).getType());
+                    System.out.printf("");
+                    System.out.printf("");
+                    System.out.printf("");
+
+                }
+            }
+        }
+
     }
 
 }
