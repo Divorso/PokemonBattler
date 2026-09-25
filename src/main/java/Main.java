@@ -7,14 +7,14 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Pokemon> pokemonArray = FileHandler.loadPokemons();
+        System.out.println(pokemonArray.get(0).getName());
         pokedexServices.seedPokemon(pokemonArray);
 
         boolean isRunning = true;
         while (isRunning){
             Graphics.getIntroGraphics();
             Graphics.getUserOptionsGraphics();
-            int userChoice = scanner.nextInt();
-            scanner.nextLine();
+            int userChoice = ErrorHandelingService.checkIntMinMax(scanner,1,8);
             switch (userChoice) {
                 case 1 -> {
                     Graphics.getEmptySpace(20);
@@ -38,22 +38,29 @@ public class Main {
                     pokedexServices.updatePokemon(scanner,pokemonArray);
                 }
                 case 5 -> {
-                    System.out.println("Raderar alla pokemons och ersätter med seed data, dvs 5st pokemons");
+                    Graphics.getEmptySpace(20);
+                    FileHandler.savePokemons(pokemonArray);
+                    Graphics.getSavedPokemon();
+                    Graphics.getReturnInMenu(scanner);
                 }
                 case 6 -> {
-                    System.out.println("Spara till fil");
+                    Graphics.getEmptySpace(20);
+                    pokemonArray = FileHandler.loadPokemons();
+                    Graphics.getLoadGraphics();
+                    Graphics.getReturnInMenu(scanner);
                 }
                 case 7 -> {
-                    System.out.println("Ladda från fil");
+                    Graphics.getEmptySpace(20);
+                    pokemonArray.clear();
+                    pokedexServices.seedPokemon(pokemonArray);
+                    Graphics.getResetToSeedGraphics();
+                    Graphics.getReturnInMenu(scanner);
                 }
                 case 8 -> {
-                    System.out.println("Sparar spelet och avslutar");
-                    //isRunning = false;
+                    Graphics.getEmptySpace(20);
+                    Graphics.getQuitGameGraphics();
+                    isRunning = false;
                 }
-                default -> {
-                    System.out.println("Obs välj mellan 1-6");
-                }
-
             }
 
         };

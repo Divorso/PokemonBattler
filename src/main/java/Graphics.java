@@ -46,23 +46,44 @@ public class Graphics {
         public static void getUpdatePokemonGraphics(){
             System.out.println("""
                 ======================================================================
-                =============== Update a Pokemon in your PokeIndex ===================
+                ============= Updatera dina Pokemon i din PokeIndex ==================
                 ======================================================================
                 """);
         }
+        public static void getSavedPokemon(){
+        System.out.println("""
+                ======================================================================
+                ==================  Dina Pokemon är nu sparade  ======================
+                ======================================================================
+                """);
+        }
+
         public static void getResetToSeedGraphics(){
             System.out.println("""
                 ======================================================================
-                ================= All Pokemon have been removed ======================
-                ================= Your index have been resetted ======================
-                ======================  To it's seed data  ===========================
+                ================ Alla dina Pokemon är nu borttagna ===================
+                =================== Och ersatt med seed Pokemon ======================
                 ======================================================================
                 """);
+        }
+        public static void getAttackRemoveGraphics(){
+            System.out.println("""
+                    ======================================================================
+                    ======================= Ta bort attack ===============================
+                    ======================================================================
+                    """);
         }
         public static void getQuitGameGraphics(){
             System.out.println("""
                 ======================================================================
                 ==================== Tack för att du spelade =========================
+                ======================================================================
+                """);
+        }
+        public static void getLoadGraphics(){
+            System.out.println("""
+                ======================================================================
+                ==================== Laddar från tidigare fil ========================
                 ======================================================================
                 """);
         }
@@ -72,10 +93,10 @@ public class Graphics {
             System.out.println("2) Lägg till en Pokemon");
             System.out.println("3) Ta bort en Pokemon");
             System.out.println("4) Uppdatera en pokemon");
-            System.out.println("5) Ladda från fil");
-            System.out.println("7) Spara till fil");
-            System.out.println("8) Radera alla Pokemon och gå tillbaka till seed data");
-            System.out.println("9) Avsluta spelet");
+            System.out.println("5) Spara data");
+            System.out.println("6) Ladda data");
+            System.out.println("7) Radera nuvarande Pokemon och ladda in seed data");
+            System.out.println("8) Avsluta spelet");
         }
         public static void getAttackGraphics(){
             System.out.println("""
