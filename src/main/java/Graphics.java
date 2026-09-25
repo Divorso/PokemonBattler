@@ -36,7 +36,7 @@ public class Graphics {
                 ======================================================================
                 """);
         }
-        public static void  getRemovePokemonGrahpics(){
+        public static void getRemovePokemonGraphics(){
             System.out.println("""
                 ======================================================================
                 =============== Ta bort Pokemon i från din PokeIndex =================
@@ -57,7 +57,6 @@ public class Graphics {
                 ======================================================================
                 """);
         }
-
         public static void getResetToSeedGraphics(){
             System.out.println("""
                 ======================================================================
@@ -96,7 +95,7 @@ public class Graphics {
             System.out.println("5) Spara data");
             System.out.println("6) Ladda data");
             System.out.println("7) Radera nuvarande Pokemon och ladda in seed data");
-            System.out.println("8) Avsluta spelet");
+            System.out.println("8) Spara och avsluta spelet");
         }
         public static void getAttackGraphics(){
             System.out.println("""
@@ -112,7 +111,6 @@ public class Graphics {
                 ======================================================================
                 """);
         }
-
         public static void getPokemonCreatedGraphics(){
             System.out.println("""
                 ======================================================================

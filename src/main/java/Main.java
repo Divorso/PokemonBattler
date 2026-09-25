@@ -7,8 +7,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Pokemon> pokemonArray = FileHandler.loadPokemons();
-        System.out.println(pokemonArray.get(0).getName());
-        pokedexServices.seedPokemon(pokemonArray);
+        PokedexServices.seedPokemon(pokemonArray);
 
         boolean isRunning = true;
         while (isRunning){
@@ -19,23 +18,23 @@ public class Main {
                 case 1 -> {
                     Graphics.getEmptySpace(20);
                     Graphics.getPokemonListGraphics();
-                    pokedexServices.showAllPokemons(pokemonArray,"all");
+                    PokedexServices.showAllPokemon(pokemonArray,"all");
                     Graphics.getReturnInMenu(scanner);
                     Graphics.getEmptySpace(20);
                 }
                 case 2 -> {
                     Graphics.getEmptySpace(20);
-                    pokedexServices.addPokemon(pokemonArray, scanner);
+                    PokedexServices.addPokemon(pokemonArray, scanner);
                 }
                 case 3 -> {
                     Graphics.getEmptySpace(20);
-                    Graphics.getRemovePokemonGrahpics();
-                    pokedexServices.removePokemon(scanner, pokemonArray);
+                    Graphics.getRemovePokemonGraphics();
+                    PokedexServices.removePokemon(scanner, pokemonArray);
                 }
                 case 4 -> {
                     Graphics.getEmptySpace(20);
                     Graphics.getUpdatePokemonGraphics();
-                    pokedexServices.updatePokemon(scanner,pokemonArray);
+                    PokedexServices.updatePokemon(scanner,pokemonArray);
                 }
                 case 5 -> {
                     Graphics.getEmptySpace(20);
@@ -52,17 +51,19 @@ public class Main {
                 case 7 -> {
                     Graphics.getEmptySpace(20);
                     pokemonArray.clear();
-                    pokedexServices.seedPokemon(pokemonArray);
+                    PokedexServices.seedPokemon(pokemonArray);
                     Graphics.getResetToSeedGraphics();
                     Graphics.getReturnInMenu(scanner);
                 }
                 case 8 -> {
                     Graphics.getEmptySpace(20);
                     Graphics.getQuitGameGraphics();
+                    FileHandler.savePokemons(pokemonArray);
                     isRunning = false;
                 }
             }
 
-        };
-    };
+        }
+        scanner.close();
+    }
 }

@@ -11,8 +11,6 @@ public class FileHandler {
     private static final File FILE =
             new File("src/main/resources/Pokemons.json");
 
-
-    // Loads Pokemon from JSON
     public static ArrayList<Pokemon> loadPokemons() throws IOException {
 
         ObjectMapper mapper = new ObjectMapper();
@@ -27,7 +25,6 @@ public class FileHandler {
 
         return pokemons;
     }
-
 
     public static void savePokemons(ArrayList<Pokemon> pokemonArray) throws IOException {
 
