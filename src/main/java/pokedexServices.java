@@ -195,5 +195,171 @@ public class pokedexServices {
         }
 
     }
+    public static void seedPokemon(ArrayList<Pokemon> pokemonArrayList){
+        if(pokemonArrayList.isEmpty()){
+            Pokemon growlithe = new Pokemon();
 
-}
+            growlithe.setName("Growlithe");
+            growlithe.setMaxHP(115);
+            growlithe.setCurrentHP(115);
+            growlithe.setType(Type.FIRE);
+
+            ArrayList<Attack> growlitheAttacks = new ArrayList<>();
+
+            Attack flameWheel = new Attack();
+            flameWheel.setAttackName("Flame Wheel");
+            flameWheel.setBaseDamage(35);
+            flameWheel.setAccuracy(90);
+            flameWheel.setType(Type.FIRE);
+
+            Attack bite = new Attack();
+            bite.setAttackName("Bite");
+            bite.setBaseDamage(25);
+            bite.setAccuracy(95);
+            bite.setType(Type.PHYSICAL);
+
+            growlitheAttacks.add(flameWheel);
+            growlitheAttacks.add(bite);
+
+            growlithe.setAttacks(growlitheAttacks);
+            pokemonArrayList.add(growlithe);
+
+
+            Pokemon psyduck = new Pokemon();
+            psyduck.setName("Psyduck");
+            psyduck.setMaxHP(125);
+            psyduck.setCurrentHP(125);
+            psyduck.setType(Type.WATER);
+
+            ArrayList<Attack> psyduckAttacks = new ArrayList<>();
+
+            Attack waterPulse = new Attack();
+            waterPulse.setAttackName("Water Pulse");
+            waterPulse.setBaseDamage(40);
+            waterPulse.setAccuracy(90);
+            waterPulse.setType(Type.WATER);
+
+            Attack scratchPsyduck = new Attack();
+            scratchPsyduck.setAttackName("Scratch");
+            scratchPsyduck.setBaseDamage(25);
+            scratchPsyduck.setAccuracy(100);
+            scratchPsyduck.setType(Type.PHYSICAL);
+
+            psyduckAttacks.add(waterPulse);
+            psyduckAttacks.add(scratchPsyduck);
+
+            psyduck.setAttacks(psyduckAttacks);
+            pokemonArrayList.add(psyduck);
+
+
+            Pokemon oddish = new Pokemon();
+            oddish.setName("Oddish");
+            oddish.setMaxHP(100);
+            oddish.setCurrentHP(100);
+            oddish.setType(Type.GRASS);
+
+            ArrayList<Attack> oddishAttacks = new ArrayList<>();
+
+            Attack absorb = new Attack();
+            absorb.setAttackName("Absorb");
+            absorb.setBaseDamage(30);
+            absorb.setAccuracy(95);
+            absorb.setType(Type.GRASS);
+
+            Attack razorLeaf = new Attack();
+            razorLeaf.setAttackName("Razor Leaf");
+            razorLeaf.setBaseDamage(40);
+            razorLeaf.setAccuracy(90);
+            razorLeaf.setType(Type.GRASS);
+
+            oddishAttacks.add(absorb);
+            oddishAttacks.add(razorLeaf);
+
+            oddish.setAttacks(oddishAttacks);
+            pokemonArrayList.add(oddish);
+
+
+            Pokemon magnemite = new Pokemon();
+            magnemite.setName("Magnemite");
+            magnemite.setMaxHP(90);
+            magnemite.setCurrentHP(90);
+            magnemite.setType(Type.ELECTRIC);
+
+            ArrayList<Attack> magnemiteAttacks = new ArrayList<>();
+
+            Attack thunderWave = new Attack();
+            thunderWave.setAttackName("Thunder Wave");
+            thunderWave.setBaseDamage(30);
+            thunderWave.setAccuracy(90);
+            thunderWave.setType(Type.ELECTRIC);
+
+            Attack spark = new Attack();
+            spark.setAttackName("Spark");
+            spark.setBaseDamage(40);
+            spark.setAccuracy(95);
+            spark.setType(Type.ELECTRIC);
+
+            magnemiteAttacks.add(thunderWave);
+            magnemiteAttacks.add(spark);
+
+            magnemite.setAttacks(magnemiteAttacks);
+            pokemonArrayList.add(magnemite);
+
+
+            Pokemon snorunt = new Pokemon();
+            snorunt.setName("Snorunt");
+            snorunt.setMaxHP(105);
+            snorunt.setCurrentHP(105);
+            snorunt.setType(Type.ICE);
+
+            ArrayList<Attack> snoruntAttacks = new ArrayList<>();
+
+            Attack iceShard = new Attack();
+            iceShard.setAttackName("Ice Shard");
+            iceShard.setBaseDamage(35);
+            iceShard.setAccuracy(100);
+            iceShard.setType(Type.ICE);
+
+            Attack icyWind = new Attack();
+            icyWind.setAttackName("Icy Wind");
+            icyWind.setBaseDamage(40);
+            icyWind.setAccuracy(90);
+            icyWind.setType(Type.ICE);
+
+            snoruntAttacks.add(iceShard);
+            snoruntAttacks.add(icyWind);
+
+            snorunt.setAttacks(snoruntAttacks);
+            pokemonArrayList.add(snorunt);
+
+
+            Pokemon meowth = new Pokemon();
+            meowth.setName("Meowth");
+            meowth.setMaxHP(100);
+            meowth.setCurrentHP(100);
+            meowth.setType(Type.PHYSICAL);
+
+            ArrayList<Attack> meowthAttacks = new ArrayList<>();
+
+            Attack scratchMeowth = new Attack();
+            scratchMeowth.setAttackName("Scratch");
+            scratchMeowth.setBaseDamage(25);
+            scratchMeowth.setAccuracy(100);
+            scratchMeowth.setType(Type.PHYSICAL);
+
+            Attack slash = new Attack();
+            slash.setAttackName("Slash");
+            slash.setBaseDamage(40);
+            slash.setAccuracy(95);
+            slash.setType(Type.PHYSICAL);
+
+            meowthAttacks.add(scratchMeowth);
+            meowthAttacks.add(slash);
+
+            meowth.setAttacks(meowthAttacks);
+            pokemonArrayList.add(meowth);
+        }
+
+
+    }
+};

@@ -7,8 +7,8 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Pokemon> pokemonArray = FileHandler.loadPokemons();
-        System.out.println(pokemonArray.getFirst());
-        pokemonArray.contains("Charmander");
+        pokedexServices.seedPokemon(pokemonArray);
+
         boolean isRunning = true;
         while (isRunning){
             Graphics.getIntroGraphics();
