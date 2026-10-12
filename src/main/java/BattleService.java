@@ -128,7 +128,7 @@ public class BattleService {
 
         defender.takeDamage(damageSent);
 
-        System.out.println("Attacken träffade och gjorde " + damage + " skada!");
+        System.out.println("Attacken träffade och gjorde " + damageSent + " skada!");
         System.out.println(defender.getName() + " har " + defender.getCurrentHP() + " HP kvar.");
     }
 }
