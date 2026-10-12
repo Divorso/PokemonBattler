@@ -58,6 +58,8 @@ public class BattleService {
             System.out.println("Nuvarande runda: " + round);
             System.out.printf("Player HP: %d\n", playerPokemon.getCurrentHP());
             System.out.printf("CPU HP: %d\n", cpuPokemon.getCurrentHP());
+
+            chooseAttack(playerPokemon,scanner);
             round++;
 
         }
@@ -94,5 +96,24 @@ public class BattleService {
                 System.out.println("Du måste ange en siffra.");
             }
         }
+    }
+    public static void performAttack(Pokemon attacker, Pokemon defender, Attack attack) {
+        int hitRoll = (int) (Math.random() * 100) + 1;
+
+        System.out.printf("%s använder attacken %s\n", attacker.getName(), attack.getAttackName());
+
+        if (hitRoll > attack.getAccuracy()) {
+            System.out.println("Attacken missade!");
+            return;
+        }
+
+        double damageEffectivenessMultiplier = Math.random();
+        double damage = attack.getBaseDamage() * damageEffectivenessMultiplier;
+        int damageSent = (int)damage;
+
+        defender.takeDamage(damageSent);
+
+        System.out.println("Attacken träffade och gjorde " + damage + " skada!");
+        System.out.println(defender.getName() + " har " + defender.getCurrentHP() + " HP kvar.");
     }
 }
