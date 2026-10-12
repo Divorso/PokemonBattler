@@ -36,7 +36,6 @@ public class BattleService {
 
         int playerRoll = (int) (Math.random() * 100) + 1;
         int cpuRoll = (int) (Math.random() * 100) + 1;
-
         boolean playerFirst = playerRoll >= cpuRoll;
 
         System.out.println("Player rolled: " + playerRoll);
@@ -59,11 +58,17 @@ public class BattleService {
             System.out.printf("Player HP: %d\n", playerPokemon.getCurrentHP());
             System.out.printf("CPU HP: %d\n", cpuPokemon.getCurrentHP());
 
-            Attack playerAttack = chooseAttack(playerPokemon,scanner, "player");
-            performAttack(playerPokemon,cpuPokemon,playerAttack);
-            Attack cpuAttack = chooseAttack(cpuPokemon,scanner,"CPU");
-            performAttack(cpuPokemon,playerPokemon,cpuAttack);
-
+            if(playerFirst ){
+                Attack playerAttack = chooseAttack(playerPokemon,scanner, "player");
+                performAttack(playerPokemon,cpuPokemon,playerAttack);
+                Attack cpuAttack = chooseAttack(cpuPokemon,scanner,"CPU");
+                performAttack(cpuPokemon,playerPokemon,cpuAttack);
+            } else {
+                Attack cpuAttack = chooseAttack(cpuPokemon,scanner,"CPU");
+                performAttack(cpuPokemon,playerPokemon,cpuAttack);
+                Attack playerAttack = chooseAttack(playerPokemon,scanner, "player");
+                performAttack(playerPokemon,cpuPokemon,playerAttack);
+            }
             round++;
 
         }
