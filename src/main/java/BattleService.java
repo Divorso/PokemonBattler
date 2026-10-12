@@ -11,7 +11,8 @@ public class BattleService {
 
             if (pokemonArray.isEmpty()) {
                 System.out.println("Du har inga Pokemon.");
-                return;
+                isRunning = false;
+                break;
             }
 
             ArrayList<Pokemon> cpuPokemonList = new ArrayList<>();
@@ -75,25 +76,28 @@ public class BattleService {
                 if (playerFirst) {
                     Attack playerAttack = chooseAttack(playerPokemon, scanner, "player");
                     DamageCalculator.performAttack(playerPokemon, cpuPokemon, playerAttack);
-                    Attack cpuAttack = chooseAttack(cpuPokemon, scanner, "CPU");
-                    DamageCalculator.performAttack(cpuPokemon, playerPokemon, cpuAttack);
+                    if(!cpuPokemon.isDefeated()){
+                        Attack cpuAttack = chooseAttack(cpuPokemon, scanner, "CPU");
+                        DamageCalculator.performAttack(cpuPokemon, playerPokemon, cpuAttack);
+                    }
                 } else {
                     Attack cpuAttack = chooseAttack(cpuPokemon, scanner, "CPU");
                     DamageCalculator.performAttack(cpuPokemon, playerPokemon, cpuAttack);
-                    Attack playerAttack = chooseAttack(playerPokemon, scanner, "player");
-                    DamageCalculator.performAttack(playerPokemon, cpuPokemon, playerAttack);
+                    if(!playerPokemon.isDefeated()){
+                        Attack playerAttack = chooseAttack(playerPokemon, scanner, "player");
+                        DamageCalculator.performAttack(playerPokemon, cpuPokemon, playerAttack);
+                    }
+
                 }
                 round++;
 
             }
 
-            System.out.println("Fortsätt spela? y/n: ");
+            System.out.println("Avsluta för att sluta spela: ");
             String keepPlaying = scanner.nextLine();
-            if(keepPlaying.equalsIgnoreCase("n")){
+            if(keepPlaying.equalsIgnoreCase("avsluta")){
                 System.out.println("Tack för att du spelade! ");
                 isRunning = false;
-            } else if (keepPlaying.equalsIgnoreCase("y")) {
-                return;
             }
 
 
