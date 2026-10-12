@@ -89,13 +89,19 @@ public class BattleService {
                     }
 
                 }
+                }
+                if (cpuPokemon.isDefeated()) {
+                    System.out.println("Du vann!");
+                    playerWins++;
+                } else if(playerPokemon.isDefeated()) {
+                    System.out.println("Du förlorade!");
                 round++;
 
             }
 
-            System.out.println("Avsluta för att sluta spela: ");
+            System.out.println("Skriv 'avslut' för att avsluta spelet: ");
             String keepPlaying = scanner.nextLine();
-            if(keepPlaying.equalsIgnoreCase("avsluta")){
+            if(keepPlaying.equalsIgnoreCase("avslut")){
                 System.out.println("Tack för att du spelade! ");
                 isRunning = false;
             }
