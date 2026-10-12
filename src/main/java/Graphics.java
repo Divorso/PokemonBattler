@@ -121,6 +121,7 @@ public class Graphics {
             System.out.println("6) Ladda data");
             System.out.println("7) Radera nuvarande Pokemon och ladda in seed data");
             System.out.println("8) Spara och avsluta spelet");
+            System.out.println("9) Spela Pokemon-Battler");
         }
         public static void getAttackGraphics(){
             System.out.println("""

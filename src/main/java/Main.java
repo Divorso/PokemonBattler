@@ -13,7 +13,7 @@ public class Main {
         while (isRunning){
             Graphics.getIntroGraphics();
             Graphics.getUserOptionsGraphics();
-            int userChoice = ErrorHandelingService.checkIntMinMax(scanner,1,8);
+            int userChoice = ErrorHandelingService.checkIntMinMax(scanner,1,9);
             switch (userChoice) {
                 case 1 -> {
                     Graphics.getEmptySpace(20);
@@ -60,6 +60,9 @@ public class Main {
                     Graphics.getQuitGameGraphics();
                     FileHandler.savePokemons(pokemonArray);
                     isRunning = false;
+                }
+                case 9 ->{
+                    BattleService.StartBattle(pokemonArray,scanner);
                 }
             }
 
