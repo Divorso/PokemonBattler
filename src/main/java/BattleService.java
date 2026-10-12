@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BattleService {
-    public static void StartBattle(ArrayList<Pokemon> pokemonArray, Scanner scanner){
-        if(pokemonArray.isEmpty()){
+    public static void StartBattle(ArrayList<Pokemon> pokemonArray, Scanner scanner) {
+        if (pokemonArray.isEmpty()) {
             System.out.println("Du har inga Pokemon.");
             return;
         }
@@ -14,16 +14,15 @@ public class BattleService {
         Pokemon playerPokemon = null;
 
 
-
-        PokedexServices.showAllPokemon(pokemonArray,"name");
+        PokedexServices.showAllPokemon(pokemonArray, "name");
         System.out.println("Välj en Pokemon");
-        String choicePokemon = ErrorHandelingService.checkForPokemon(scanner,pokemonArray);
-        if (choicePokemon.equalsIgnoreCase("b")){
+        String choicePokemon = ErrorHandelingService.checkForPokemon(scanner, pokemonArray);
+        if (choicePokemon.equalsIgnoreCase("b")) {
             return;
         }
 
-        for(Pokemon pokemon : pokemonArray){
-            if(pokemon.getName().equalsIgnoreCase(choicePokemon)){
+        for (Pokemon pokemon : pokemonArray) {
+            if (pokemon.getName().equalsIgnoreCase(choicePokemon)) {
                 playerPokemon = pokemon;
                 break;
             }
@@ -55,7 +54,7 @@ public class BattleService {
             return;
         }
         int round = 1;
-        while (!playerPokemon.isDefeated() && !cpuPokemon.isDefeated()){
+        while (!playerPokemon.isDefeated() && !cpuPokemon.isDefeated()) {
             System.out.println("Nuvarande runda: " + round);
             System.out.printf("Player HP: %d\n", playerPokemon.getCurrentHP());
             System.out.printf("CPU HP: %d\n", cpuPokemon.getCurrentHP());
@@ -64,8 +63,36 @@ public class BattleService {
         }
 
 
-
-
     }
+    public static Attack chooseAttack(Pokemon pokemon, Scanner scanner) {
+        ArrayList<Attack> attacks = pokemon.getAttacks();
 
+        for (int i = 0; i < attacks.size(); i++) {
+            Attack attack = attacks.get(i);
+
+            System.out.printf("#%d -- Attack: %s, Bas skada: %d, Träffsäkerhet: %d%%%n",
+                    i + 1,
+                    attack.getAttackName(),
+                    attack.getBaseDamage(),
+                    attack.getAccuracy());
+        }
+
+        while (true) {
+            System.out.print("Välj en attack: ");
+            String input = scanner.nextLine();
+
+            try {
+                int choice = Integer.parseInt(input);
+
+                if (choice >= 1 && choice <= attacks.size()) {
+                    return attacks.get(choice - 1);
+                }
+
+                System.out.println("Ogiltigt attacknummer.");
+
+            } catch (NumberFormatException e) {
+                System.out.println("Du måste ange en siffra.");
+            }
+        }
+    }
 }
