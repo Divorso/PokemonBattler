@@ -21,7 +21,7 @@
   "type" : "WATER",
   "attacks" : [ {
     "attackName" : "Water Gun",
-    "baseDamage" : 45,
+    "baseDamage" : 40,
     "accuracy" : 90,
     "type" : "WATER"
   }, {
@@ -37,7 +37,7 @@
   "type" : "GRASS",
   "attacks" : [ {
     "attackName" : "Vine Whip",
-    "baseDamage" : 45,
+    "baseDamage" : 40,
     "accuracy" : 90,
     "type" : "GRASS"
   }, {
@@ -53,7 +53,7 @@
   "type" : "ELECTRIC",
   "attacks" : [ {
     "attackName" : "Thunder Shock",
-    "baseDamage" : 50,
+    "baseDamage" : 40,
     "accuracy" : 85,
     "type" : "ELECTRIC"
   }, {
