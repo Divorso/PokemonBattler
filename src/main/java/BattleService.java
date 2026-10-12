@@ -59,43 +59,58 @@ public class BattleService {
             System.out.printf("Player HP: %d\n", playerPokemon.getCurrentHP());
             System.out.printf("CPU HP: %d\n", cpuPokemon.getCurrentHP());
 
-            chooseAttack(playerPokemon,scanner);
+            Attack playerAttack = chooseAttack(playerPokemon,scanner, "player");
+            performAttack(playerPokemon,cpuPokemon,playerAttack);
+            Attack cpuAttack = chooseAttack(cpuPokemon,scanner,"CPU");
+            performAttack(cpuPokemon,playerPokemon,cpuAttack);
+
             round++;
 
         }
 
 
     }
-    public static Attack chooseAttack(Pokemon pokemon, Scanner scanner) {
-        ArrayList<Attack> attacks = pokemon.getAttacks();
+    public static Attack chooseAttack(Pokemon pokemon, Scanner scanner, String attackerSelector) {
 
-        for (int i = 0; i < attacks.size(); i++) {
-            Attack attack = attacks.get(i);
+        if(attackerSelector.equalsIgnoreCase("player")){
+            ArrayList<Attack> attacks = pokemon.getAttacks();
 
-            System.out.printf("#%d -- Attack: %s, Bas skada: %d, Träffsäkerhet: %d%%%n",
-                    i + 1,
-                    attack.getAttackName(),
-                    attack.getBaseDamage(),
-                    attack.getAccuracy());
-        }
+            for (int i = 0; i < attacks.size(); i++) {
+                Attack attack = attacks.get(i);
 
-        while (true) {
-            System.out.print("Välj en attack: ");
-            String input = scanner.nextLine();
-
-            try {
-                int choice = Integer.parseInt(input);
-
-                if (choice >= 1 && choice <= attacks.size()) {
-                    return attacks.get(choice - 1);
-                }
-
-                System.out.println("Ogiltigt attacknummer.");
-
-            } catch (NumberFormatException e) {
-                System.out.println("Du måste ange en siffra.");
+                System.out.printf("#%d -- Attack: %s, Bas skada: %d, Träffsäkerhet: %d%%%n",
+                        i + 1,
+                        attack.getAttackName(),
+                        attack.getBaseDamage(),
+                        attack.getAccuracy());
             }
+
+            while (true) {
+                System.out.print("Välj en attack: ");
+                String input = scanner.nextLine();
+
+                try {
+                    int choice = Integer.parseInt(input);
+
+                    if (choice >= 1 && choice <= attacks.size()) {
+                        return attacks.get(choice - 1);
+                    }
+
+                    System.out.println("Ogiltigt attacknummer.");
+
+                } catch (NumberFormatException e) {
+                    System.out.println("Du måste ange en siffra.");
+                }
+            }
+        } else if (attackerSelector.equalsIgnoreCase("CPU")) {
+            ArrayList<Attack> attacks = pokemon.getAttacks();
+            int randomIndex = (int) (Math.random() * attacks.size());
+            Attack cpuAttackRandom = attacks.get(randomIndex);
+
+            return cpuAttackRandom;
+
         }
+        throw new IllegalArgumentException("Ogiltig attackerSelector: " + attackerSelector);
     }
     public static void performAttack(Pokemon attacker, Pokemon defender, Attack attack) {
         int hitRoll = (int) (Math.random() * 100) + 1;
