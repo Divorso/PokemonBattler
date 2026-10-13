@@ -1,4 +1,5 @@
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class Pokemon {
 
         currentHP = Math.max(0, currentHP - damage);
     }
-
+    @JsonIgnore
     public boolean isDefeated() {
         return currentHP <= 0;
     }

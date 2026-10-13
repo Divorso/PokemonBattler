@@ -98,7 +98,7 @@ public class BattleService {
                     statistics.addCpuWin();
                 }
                 statistics.showStatistics();
-
+            FileHandler.saveBattleStatistics(statistics);
             System.out.println("Skriv 'avslut' för att avsluta spelet: ");
             String keepPlaying = scanner.nextLine();
             if(keepPlaying.equalsIgnoreCase("avslut")){

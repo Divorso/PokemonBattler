@@ -1,7 +1,6 @@
 [ {
   "name" : "Charmander",
   "maxHP" : 100,
-  "currentHP" : 100,
   "type" : "FIRE",
   "attacks" : [ {
     "attackName" : "Ember",
@@ -13,11 +12,11 @@
     "baseDamage" : 25,
     "accuracy" : 100,
     "type" : "PHYSICAL"
-  } ]
+  } ],
+  "currentHP" : 100
 }, {
   "name" : "Squirtle",
   "maxHP" : 120,
-  "currentHP" : 120,
   "type" : "WATER",
   "attacks" : [ {
     "attackName" : "Water Gun",
@@ -29,11 +28,11 @@
     "baseDamage" : 25,
     "accuracy" : 100,
     "type" : "PHYSICAL"
-  } ]
+  } ],
+  "currentHP" : 120
 }, {
   "name" : "Bulbasaur",
   "maxHP" : 110,
-  "currentHP" : 110,
   "type" : "GRASS",
   "attacks" : [ {
     "attackName" : "Vine Whip",
@@ -45,11 +44,11 @@
     "baseDamage" : 25,
     "accuracy" : 100,
     "type" : "PHYSICAL"
-  } ]
+  } ],
+  "currentHP" : 110
 }, {
   "name" : "Pikachu",
   "maxHP" : 90,
-  "currentHP" : 90,
   "type" : "ELECTRIC",
   "attacks" : [ {
     "attackName" : "Thunder Shock",
@@ -61,11 +60,11 @@
     "baseDamage" : 30,
     "accuracy" : 100,
     "type" : "PHYSICAL"
-  } ]
+  } ],
+  "currentHP" : 90
 }, {
   "name" : "Eevee",
   "maxHP" : 105,
-  "currentHP" : 105,
   "type" : "PHYSICAL",
   "attacks" : [ {
     "attackName" : "Quick Attack",
@@ -77,11 +76,11 @@
     "baseDamage" : 25,
     "accuracy" : 100,
     "type" : "PHYSICAL"
-  } ]
+  } ],
+  "currentHP" : 0
 }, {
   "name" : "Vulpix",
   "maxHP" : 95,
-  "currentHP" : 95,
   "type" : "FIRE",
   "attacks" : [ {
     "attackName" : "Ember",
@@ -93,5 +92,6 @@
     "baseDamage" : 30,
     "accuracy" : 100,
     "type" : "PHYSICAL"
-  } ]
+  } ],
+  "currentHP" : 95
 } ]
