@@ -3,8 +3,7 @@ import java.util.Scanner;
 
 public class BattleService {
     public static void StartBattle(ArrayList<Pokemon> pokemonArray, Scanner scanner) {
-        int playerWins = 0;
-        int cpuWins = 0;
+        BattleStatistics statistics = new BattleStatistics(0,0);
         boolean isRunning = true;
 
         while (isRunning) {
@@ -93,12 +92,12 @@ public class BattleService {
                 }
                 if (cpuPokemon.isDefeated()) {
                     System.out.println("Du vann!");
-                    playerWins++;
+                    statistics.addPlayerWin();
                 } else if(playerPokemon.isDefeated()) {
                     System.out.println("Du förlorade!");
-                    cpuWins++;
-
-            }
+                    statistics.addCpuWin();
+                }
+                statistics.showStatistics();
 
             System.out.println("Skriv 'avslut' för att avsluta spelet: ");
             String keepPlaying = scanner.nextLine();
