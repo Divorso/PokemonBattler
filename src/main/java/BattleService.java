@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class BattleService {
     public static void StartBattle(ArrayList<Pokemon> pokemonArray, Scanner scanner) {
-        BattleStatistics statistics = new BattleStatistics(0,0);
+        BattleStatistics statistics = FileHandler.loadBattleStatistics();
         boolean isRunning = true;
 
         while (isRunning) {

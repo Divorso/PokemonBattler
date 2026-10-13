@@ -50,7 +50,7 @@ public class FileHandler {
 
     public static BattleStatistics loadBattleStatistics(){
         ObjectMapper mapper = new ObjectMapper();
-        if(BATTLEFILE.exists() || BATTLEFILE.length() == 0){
+        if(!BATTLEFILE.exists() || BATTLEFILE.length() == 0){
             return new BattleStatistics(0,0);
         }
 

@@ -21,7 +21,6 @@ public class BattleStatistics{
     public int getPlayerWins() {
         return playerWins;
     }
-
     public int getCpuWins() {
         return cpuWins;
     }

@@ -77,7 +77,7 @@
     "accuracy" : 100,
     "type" : "PHYSICAL"
   } ],
-  "currentHP" : 0
+  "currentHP" : 24
 }, {
   "name" : "Vulpix",
   "maxHP" : 95,
