@@ -89,13 +89,14 @@ public class BattleService {
                     }
 
                 }
+                round++;
                 }
                 if (cpuPokemon.isDefeated()) {
                     System.out.println("Du vann!");
                     playerWins++;
                 } else if(playerPokemon.isDefeated()) {
                     System.out.println("Du förlorade!");
-                round++;
+                    cpuWins++;
 
             }
 

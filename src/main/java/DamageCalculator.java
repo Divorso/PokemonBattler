@@ -9,9 +9,9 @@ public class DamageCalculator {
             return;
         }
 
-        double damageEffectivenessMultiplier = Math.random();
+        double damageEffectivenessMultiplier = 0.5 + Math.random() * 0.5;
         double damage = attack.getBaseDamage() * damageEffectivenessMultiplier;
-        int damageSent = (int)damage;
+        int damageSent = Math.max(1, (int) Math.round(damage));
 
         defender.takeDamage(damageSent);
 
