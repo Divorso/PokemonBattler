@@ -4,13 +4,13 @@ import java.util.Scanner;
 public class BattleService {
     public static void StartBattle(ArrayList<Pokemon> pokemonArray, Scanner scanner) {
         BattleStatistics statistics = FileHandler.loadBattleStatistics();
-        boolean isRunning = true;
+        AttackSelector playerSelector = new PlayerAttackSelector(scanner);
+        AttackSelector cpuSelector = new CPUAttackSelector();
 
-        while (isRunning) {
+        while (true) {
 
             if (pokemonArray.isEmpty()) {
                 System.out.println("Du har inga Pokemon.");
-                isRunning = false;
                 break;
             }
 
@@ -73,17 +73,17 @@ public class BattleService {
                 System.out.printf("CPU HP: %d\n", cpuPokemon.getCurrentHP());
 
                 if (playerFirst) {
-                    Attack playerAttack = chooseAttack(playerPokemon, scanner, "player");
+                    Attack playerAttack = playerSelector.chooseAttack(playerPokemon);
                     DamageCalculator.performAttack(playerPokemon, cpuPokemon, playerAttack);
                     if(!cpuPokemon.isDefeated()){
-                        Attack cpuAttack = chooseAttack(cpuPokemon, scanner, "CPU");
+                        Attack cpuAttack = cpuSelector.chooseAttack(cpuPokemon);
                         DamageCalculator.performAttack(cpuPokemon, playerPokemon, cpuAttack);
                     }
                 } else {
-                    Attack cpuAttack = chooseAttack(cpuPokemon, scanner, "CPU");
+                    Attack cpuAttack = cpuSelector.chooseAttack(cpuPokemon);
                     DamageCalculator.performAttack(cpuPokemon, playerPokemon, cpuAttack);
                     if(!playerPokemon.isDefeated()){
-                        Attack playerAttack = chooseAttack(playerPokemon, scanner, "player");
+                        Attack playerAttack = playerSelector.chooseAttack(playerPokemon);
                         DamageCalculator.performAttack(playerPokemon, cpuPokemon, playerAttack);
                     }
 
@@ -103,52 +103,10 @@ public class BattleService {
             String keepPlaying = scanner.nextLine();
             if(keepPlaying.equalsIgnoreCase("avslut")){
                 System.out.println("Tack för att du spelade! ");
-                isRunning = false;
+                break;
             }
 
 
         }
-    }
-    public static Attack chooseAttack(Pokemon pokemon, Scanner scanner, String attackerSelector) {
-
-        if(attackerSelector.equalsIgnoreCase("player")){
-            ArrayList<Attack> attacks = pokemon.getAttacks();
-
-            for (int i = 0; i < attacks.size(); i++) {
-                Attack attack = attacks.get(i);
-
-                System.out.printf("#%d -- Attack: %s, Bas skada: %d, Träffsäkerhet: %d%%%n",
-                        i + 1,
-                        attack.getAttackName(),
-                        attack.getBaseDamage(),
-                        attack.getAccuracy());
-            }
-
-            while (true) {
-                System.out.print("Välj en attack: ");
-                String input = scanner.nextLine();
-
-                try {
-                    int choice = Integer.parseInt(input);
-
-                    if (choice >= 1 && choice <= attacks.size()) {
-                        return attacks.get(choice - 1);
-                    }
-
-                    System.out.println("Ogiltigt attacknummer.");
-
-                } catch (NumberFormatException e) {
-                    System.out.println("Du måste ange en siffra.");
-                }
-            }
-        } else if (attackerSelector.equalsIgnoreCase("CPU")) {
-            ArrayList<Attack> attacks = pokemon.getAttacks();
-            int randomIndex = (int) (Math.random() * attacks.size());
-            Attack cpuAttackRandom = attacks.get(randomIndex);
-
-            return cpuAttackRandom;
-
-        }
-        throw new IllegalArgumentException("Ogiltig attackerSelector: " + attackerSelector);
     }
 }
