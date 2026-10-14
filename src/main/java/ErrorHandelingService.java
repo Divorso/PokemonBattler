@@ -45,21 +45,16 @@ public class ErrorHandelingService {
 
         while (true) {
             String userInput = checkNameLettersOnly(scanner).trim();
-            try {
                 if(userInput.equalsIgnoreCase("b")){
                     return userInput;
                 }
-
-                for (Pokemon pokemon : pokemonArray) {
-
-                    if (pokemon.getName().equalsIgnoreCase(userInput)) {
-                        return userInput;
-                    }
-                }
-                throw new InvalidPokemonException();
+            try {
+                PokedexServices.findPokemon(userInput,pokemonArray);
+                return userInput;
 
             } catch (InvalidPokemonException e) {
-                System.out.printf("Hittar ingen Pokemon som heter %s, testa igen eller skriv 'b' för att backa: ", userInput);
+                System.out.println(e.getMessage());
+                System.out.println("Testa igen eller skriv 'b' för att backa");
             }
         }
     }

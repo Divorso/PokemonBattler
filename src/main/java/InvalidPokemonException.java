@@ -1,6 +1,6 @@
-public class InvalidPokemonException extends Exception {
+public class InvalidPokemonException extends RuntimeException {
 
     public InvalidPokemonException() {
-        super();
+        super("Pokemon finns inte!");
     }
 }

@@ -379,4 +379,13 @@ public class PokedexServices {
             pokemonArrayList.add(meowth);
         }
     }
+    public static Pokemon findPokemon(String name, ArrayList<Pokemon> pokemonArray) {
+
+        for (Pokemon pokemon : pokemonArray) {
+            if (pokemon.getName().equalsIgnoreCase(name)) {
+                return pokemon;
+            }
+        }
+        throw new InvalidPokemonException();
+    }
 };

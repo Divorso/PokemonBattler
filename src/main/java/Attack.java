@@ -19,7 +19,7 @@ public class Attack {
             throw new IllegalArgumentException("Attacknamn får ej vara tomt");
         }
 
-        if (baseDamage < 1 || baseDamage > 40) {
+        if (baseDamage < 1 || baseDamage > 50) {
             throw new IllegalArgumentException("Base damage måste vara mellan 1 - 40");
         }
 
