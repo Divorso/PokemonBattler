@@ -10,7 +10,15 @@ public class DamageCalculator {
         }
 
         double randomMultiplier = 0.5 + Math.random() * 0.5;
-        double damage = attack.getBaseDamage() * randomMultiplier;
+        double typeMultiplier = getTypeMultiplier(attack.getType(), defender.getType());
+        double damage = attack.getBaseDamage() * randomMultiplier * typeMultiplier;
+
+        if (typeMultiplier == 2) {
+            System.out.println("Effektiv skada!!");
+        } else if (typeMultiplier == 0.5) {
+            System.out.println("Skadan var mindre effektiv.");
+        }
+
         int damageSent = Math.max(1, (int) Math.round(damage));
 
         defender.takeDamage(damageSent);
@@ -18,4 +26,57 @@ public class DamageCalculator {
         System.out.println("Attacken träffade och gjorde " + damageSent + " skada!");
         System.out.println(defender.getName() + " har " + defender.getCurrentHP() + " HP kvar.");
     }
+    public static double getTypeMultiplier(Type attackType, Type defenderType) {
+
+        switch (attackType){
+            case PHYSICAL -> {
+                return 1;
+            }
+            case FIRE -> {
+                if(defenderType == Type.GRASS || defenderType == Type.ICE){
+                    return 2;
+                } else if (defenderType == Type.WATER || defenderType == Type.ELECTRIC) {
+                    return 0.5;
+                } else {
+                    return 1;
+                }
+            }
+            case ICE -> {
+                if(defenderType == Type.GRASS || defenderType == Type.WATER){
+                    return 2;
+                } else if (defenderType == Type.FIRE || defenderType == Type.ELECTRIC) {
+                    return 0.5;
+                } else {
+                    return 1;
+                }
+            }
+            case WATER -> {
+                if(defenderType == Type.ELECTRIC || defenderType == Type.FIRE ){
+                    return 2;
+                } else if (defenderType == Type.GRASS || defenderType == Type.ICE) {
+                    return 0.5;
+                }else {
+                    return 1;
+                }
+            }
+            case ELECTRIC -> {
+                if(defenderType == Type.WATER){
+                    return 2;
+                } else{
+                    return 1;
+                }
+            }
+            case GRASS -> {
+                if(defenderType == Type.WATER){
+                    return 2;
+                } else if (defenderType == Type.FIRE) {
+                    return 0.5;
+                }else {
+                return 1;}
+            }
+
+            }
+            return 1.0;
+    }
 }
+

@@ -8,7 +8,6 @@ public class BattleService {
         AttackSelector cpuSelector = new CPUAttackSelector();
 
         while (true) {
-
             if (pokemonArray.isEmpty()) {
                 System.out.println("Du har inga Pokemon.");
                 break;
