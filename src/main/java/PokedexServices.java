@@ -1,35 +1,42 @@
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class PokedexServices {
     public static void showAllPokemon(ArrayList<Pokemon> pokemonArray, String choice){
-
         if(pokemonArray.isEmpty()){
             System.out.println("Du har inga Pokemon");
         } else {
-            if(choice.equalsIgnoreCase("all")){
-                for(Pokemon pokemon : pokemonArray){
-                    System.out.printf("Namn: %s, max HP: %d, nuvarande HP %d, Pokemon typ: %s \n",
-                            pokemon.getName(),pokemon.getMaxHP(),pokemon.getCurrentHP(),pokemon.getType());
 
-                    for(Attack attack : pokemon.getAttacks()){
-                        System.out.printf("Attack name: %s, base damage: %d, accuracy: %d, attack: %s\n",
-                                attack.getAttackName(),
-                                attack.getBaseDamage(),
-                                attack.getAccuracy(),
-                                attack.getType()
-                        );
+            switch (choice.toLowerCase()){
+                case "all" -> {
+                    for(Pokemon pokemon : pokemonArray){
+                        System.out.printf("Namn: %s, max HP: %d, nuvarande HP %d, Pokemon typ: %s \n",
+                                pokemon.getName(),pokemon.getMaxHP(),pokemon.getCurrentHP(),pokemon.getType());
+
+                        for(Attack attack : pokemon.getAttacks()){
+                            System.out.printf("Attack name: %s, base damage: %d, accuracy: %d, attack: %s\n",
+                                    attack.getAttackName(),
+                                    attack.getBaseDamage(),
+                                    attack.getAccuracy(),
+                                    attack.getType()
+                            );
+                        }
+                        Graphics.getEmptySpace(2);
                     }
-                    Graphics.getEmptySpace(2);
 
                 }
-
-            } else if (choice.equalsIgnoreCase("name")) {
-                for(Pokemon pokemon : pokemonArray){
-                    System.out.printf("Namn: %s \n", pokemon.getName());
+                case "battle" -> {
+                    for(Pokemon pokemon : pokemonArray){
+                        System.out.printf("Namn: %s , NuvarandeHP: %s \n", pokemon.getName(),pokemon.getCurrentHP());
+                    }
+                }
+                case "name" -> {
+                    for(Pokemon pokemon : pokemonArray){
+                        System.out.printf("Namn: %s \n", pokemon.getName());
+                    }
                 }
             }
-
         }
     }
     public static void addPokemon(ArrayList<Pokemon> pokemonArray, Scanner scanner){

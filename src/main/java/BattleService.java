@@ -10,25 +10,22 @@ public class BattleService {
         while (true) {
             if (pokemonArray.isEmpty()) {
                 System.out.println("Du har inga Pokemon.");
-                break;
+                return;
             }
 
             ArrayList<Pokemon> cpuPokemonList = new ArrayList<>();
             PokedexServices.seedPokemon(cpuPokemonList);
+
 
             int randomIndex = (int) (Math.random() * cpuPokemonList.size());
             Pokemon cpuPokemon = cpuPokemonList.get(randomIndex);
             Pokemon playerPokemon = null;
 
 
-            PokedexServices.showAllPokemon(pokemonArray, "name");
+            PokedexServices.showAllPokemon(pokemonArray, "battle");
             System.out.println("Välj en Pokemon");
             String choicePokemon = ErrorHandelingService.checkForPokemon(scanner, pokemonArray);
-
-
-            if (choicePokemon.equalsIgnoreCase("b")) {
-                return;
-            }
+            if (choicePokemon.equalsIgnoreCase("b")) return;
 
             for (Pokemon pokemon : pokemonArray) {
                 if (pokemon.getName().equalsIgnoreCase(choicePokemon)) {
@@ -37,6 +34,18 @@ public class BattleService {
                 }
             }
 
+            if (playerPokemon.getAttacks() == null || playerPokemon.getAttacks().isEmpty()) {
+                System.out.println("Din Pokémon har inga attacker och kan inte strida.");
+                continue;
+            }
+            if (cpuPokemon.getAttacks() == null || cpuPokemon.getAttacks().isEmpty()) {
+                System.out.println("Motståndarens Pokémon har inga attacker.");
+                continue;
+            }
+            if (playerPokemon.isDefeated()) {
+                System.out.println("Din Pokémon har 0 HP och kan inte strida.");
+                continue;
+            }
 
             System.out.println("Du kommer möta CPU pokemon: " + cpuPokemon.getName());
             System.out.println("Du har valt: " + playerPokemon.getName());
