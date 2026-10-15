@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class PokedexServices {
@@ -48,20 +47,20 @@ public class PokedexServices {
         graphics.getMessage("Lägg till Pokemon i din Pokeindex");
 
         System.out.print("----Vad ska din Pokemon heta----: ");
-        String name = ErrorHandelingService.checkNameLettersOnly(scanner);
+        String name = ValidationService.checkNameLettersOnly(scanner);
 
         System.out.println("----Vad är maxHP på din Pokemon----");
-        System.out.print("----(1-500)----: ");
-        int maxHP = ErrorHandelingService.checkIntMinMax(scanner,1,500);
+        System.out.print("----(1-400)----: ");
+        int maxHP = ValidationService.checkIntMinMax(scanner,Pokemon.MIN_HP,Pokemon.MAX_HP);
 
         System.out.println("--Vad är din Pokemon för typ välj mellan--");
         System.out.print("(PHYSICAL, FIRE, ICE, WATER, ELECTRIC, GRASS): ");
-        Type type = ErrorHandelingService.checkType(scanner);
+        Type type = ValidationService.checkType(scanner);
 
 
         System.out.println("----Hur många attacker har din Pokemon?----");
         System.out.print("----(Du får ha mellan 1-4 attacker)----: ");
-        int amountAttacks = ErrorHandelingService.checkIntMinMax(scanner,1,4 );
+        int amountAttacks = ValidationService.checkIntMinMax(scanner,1,4 );
         ArrayList<Attack> attackArray = new ArrayList<>();
 
 
@@ -79,17 +78,17 @@ public class PokedexServices {
 
 
             System.out.printf("Vad heter %s attacken: ", numberToText);
-            String attackName = ErrorHandelingService.checkNameLettersOnly(scanner);
+            String attackName = ValidationService.checkNameLettersOnly(scanner);
 
             System.out.print("Hur mycket skada gör den (1-40): ");
-            int attackDamage = ErrorHandelingService.checkIntMinMax(scanner,1,40);
+            int attackDamage = ValidationService.checkIntMinMax(scanner,Attack.MIN_DAMAGE,Attack.MAX_DAMAGE);
 
             System.out.print("Hur träffsäker är den (1-100): ");
-            int accuracy = ErrorHandelingService.checkIntMinMax(scanner,1,100);
+            int accuracy = ValidationService.checkIntMinMax(scanner,Attack.MIN_ACCURACY,Attack.MAX_ACCURACY);
 
             System.out.println("Vad är det för typ av attack?");
             System.out.print("(PHYSICAL, FIRE, ICE, WATER, ELECTRIC, GRASS): ");
-            Type typeAttack = ErrorHandelingService.checkType(scanner);
+            Type typeAttack = ValidationService.checkType(scanner);
 
             Attack newAttack = new Attack(attackName,attackDamage,accuracy,typeAttack);
             attackArray.add(newAttack);
@@ -102,20 +101,20 @@ public class PokedexServices {
     public void removePokemon(Scanner scanner, ArrayList<Pokemon> pokemonArray){
         if(pokemonArray.isEmpty()){
             System.out.println("Du har inga Pokemon att ta bort");
-            ErrorHandelingService.getReturnInMenu(scanner);
+            ValidationService.getReturnInMenu(scanner);
         } else {
             showAllPokemon(pokemonArray, "name");
             System.out.println("Vilken Pokemon vill du ta bort?");
             System.out.println("Skriv B för att backa");
             System.out.print("Pokemon: ");
-            String pokemonToRemove = ErrorHandelingService.checkForPokemon(scanner,pokemonArray);
+            String pokemonToRemove = ValidationService.checkForPokemon(scanner,pokemonArray);
             if(!pokemonToRemove.equalsIgnoreCase("b")){
                 for (int i = 0; i < pokemonArray.size(); i++) {
 
                     if (pokemonArray.get(i).getName().equalsIgnoreCase(pokemonToRemove)) {
                         System.out.printf("Är du säker på att du vill ta bort %s \n", pokemonToRemove);
                         System.out.print("Y/N: ");
-                        String userChoice = ErrorHandelingService.checkNameLettersOnly(scanner);
+                        String userChoice = ValidationService.checkNameLettersOnly(scanner);
                         if (userChoice.equalsIgnoreCase("Y")){
                             pokemonArray.remove(i);
                             System.out.println("Pokemon borttagen!");
@@ -135,7 +134,7 @@ public class PokedexServices {
         showAllPokemon(pokemonArray,"name");
 
         System.out.print("Vilken Pokemon vill du uppdatera: ");
-        String pokemonToEdit = ErrorHandelingService.checkForPokemon(scanner,pokemonArray);
+        String pokemonToEdit = ValidationService.checkForPokemon(scanner,pokemonArray);
 
         if(!pokemonToEdit.equalsIgnoreCase("b")) {
 
@@ -144,14 +143,14 @@ public class PokedexServices {
                 if (pokemon.getName().equalsIgnoreCase(pokemonToEdit)) {
 
                     System.out.printf("Vad vill du döpa %s om till: ", pokemon.getName());
-                    String updatedName = ErrorHandelingService.checkNameLettersOnly(scanner);
+                    String updatedName = ValidationService.checkNameLettersOnly(scanner);
 
                     System.out.printf("Nuvarande MAX HP är %d, vad blir nya MAX HP \n", pokemon.getMaxHP());
                     System.out.print("----(1-500)----: ");
-                    int updateMaxHP = ErrorHandelingService.checkIntMinMax(scanner, 1, 500);
+                    int updateMaxHP = ValidationService.checkIntMinMax(scanner, 1, 500);
 
                     System.out.printf("Nuvarande typ är '%s' vad blir nya 'typ': ", pokemon.getType());
-                    Type updatedType = ErrorHandelingService.checkType(scanner);
+                    Type updatedType = ValidationService.checkType(scanner);
 
                     pokemon.setName(updatedName);
                     pokemon.setMaxHP(updateMaxHP);
@@ -164,7 +163,7 @@ public class PokedexServices {
                         System.out.println("3 - Ta bort en attack");
                         System.out.println("4 - Avsluta");
 
-                        int userChoice = ErrorHandelingService.checkIntMinMax(scanner, 1, 4);
+                        int userChoice = ValidationService.checkIntMinMax(scanner, 1, 4);
 
                         switch (userChoice) {
                             case 1 -> {
@@ -186,21 +185,21 @@ public class PokedexServices {
 
                                     System.out.printf("Din nuvarande attack heter %s, vad vill du döpa om den till: ",
                                             pokemon.getAttacks().get(y).getAttackName());
-                                    String updatedAttackName = ErrorHandelingService.checkNameLettersOnly(scanner);
+                                    String updatedAttackName = ValidationService.checkNameLettersOnly(scanner);
 
                                     System.out.printf("Din nuvarande bas skada är %d, vad vill du uppdatera den till: \n",
                                             pokemon.getAttacks().get(y).getBaseDamage());
                                     System.out.print("----(1-40)----: ");
-                                    int updatedBaseDamage = ErrorHandelingService.checkIntMinMax(scanner, 1, 40);
+                                    int updatedBaseDamage = ValidationService.checkIntMinMax(scanner, 1, 40);
 
                                     System.out.printf("Din nuvarande träffsäkerhet är %d, vad vill du uppdatera den till: \n",
                                             pokemon.getAttacks().get(y).getAccuracy());
                                     System.out.print("----(1-100)----: ");
-                                    int updatedAccuracy = ErrorHandelingService.checkIntMinMax(scanner, 1, 100);
+                                    int updatedAccuracy = ValidationService.checkIntMinMax(scanner, 1, 100);
 
                                     System.out.printf("Din nuvarande attack typ är %s, vad vill du uppdatera den till: ",
                                             pokemon.getAttacks().get(y).getType());
-                                    Type updatedAttackType = ErrorHandelingService.checkType(scanner);
+                                    Type updatedAttackType = ValidationService.checkType(scanner);
 
                                     Attack updatedAttack = new Attack(updatedAttackName,updatedBaseDamage,updatedAccuracy,updatedAttackType);
                                     pokemon.getAttacks().set(y,updatedAttack);
@@ -216,23 +215,23 @@ public class PokedexServices {
                                     System.out.printf("Din Pokemon har redan %d attacker. Du kan lägga till max %d till.\n", currentAttacks, availableSlots);
                                     System.out.print("Hur många attacker vill du lägga till: ");
 
-                                    int userChoiceAttacks = ErrorHandelingService.checkIntMinMax(scanner, 1, availableSlots);
+                                    int userChoiceAttacks = ValidationService.checkIntMinMax(scanner, 1, availableSlots);
 
                                     for (int iAttack = 0; iAttack < userChoiceAttacks; iAttack++) {
                                         graphics.getEmptySpace(20);
                                         graphics.getMessage("Lägg till Attack");
 
                                         System.out.print("Vad heter attacken: ");
-                                        String attackName = ErrorHandelingService.checkNameLettersOnly(scanner);
+                                        String attackName = ValidationService.checkNameLettersOnly(scanner);
 
                                         System.out.print("Hur mycket skada gör den (1-40): ");
-                                        int attackDamage = ErrorHandelingService.checkIntMinMax(scanner, 1, 40);
+                                        int attackDamage = ValidationService.checkIntMinMax(scanner, 1, 40);
 
                                         System.out.print("Hur träffsäker är den (1-100): ");
-                                        int accuracy = ErrorHandelingService.checkIntMinMax(scanner, 1, 100);
+                                        int accuracy = ValidationService.checkIntMinMax(scanner, 1, 100);
 
                                         System.out.println("Vad är det för typ av attack?");
-                                        Type typeAttack = ErrorHandelingService.checkType(scanner);
+                                        Type typeAttack = ValidationService.checkType(scanner);
 
                                         Attack newAttack = new Attack(attackName,attackDamage,accuracy,typeAttack);
 
@@ -253,7 +252,7 @@ public class PokedexServices {
 
                                     System.out.print("Vilken attack vill du ta bort: ");
                                     String removeAttack =
-                                            ErrorHandelingService.checkNameLettersOnly(scanner);
+                                            ValidationService.checkNameLettersOnly(scanner);
 
                                     boolean attackRemoved = pokemon.getAttacks().removeIf(
                                             attack -> attack.getAttackName().equalsIgnoreCase(removeAttack));

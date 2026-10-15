@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ErrorHandelingService {
+public class ValidationService {
     public static int checkIntMinMax(Scanner scanner, int min, int max){
         while(true){
             try{

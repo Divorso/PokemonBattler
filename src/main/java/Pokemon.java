@@ -6,6 +6,10 @@ import java.util.ArrayList;
 
 public class Pokemon {
 
+    public static final int MIN_HP = 1;
+    public static final int MAX_HP = 400;
+
+
     private String name;
     private int maxHP;
     private int currentHP;
@@ -23,8 +27,8 @@ public class Pokemon {
             throw new IllegalArgumentException("Pokemon måste ha ett namn");
         }
 
-        if (maxHP < 1 || maxHP > 500) {
-            throw new IllegalArgumentException("Max HP måste vara mellan 1 - 500");
+        if (maxHP < MIN_HP || maxHP > MAX_HP) {
+            throw new IllegalArgumentException("Max HP måste vara mellan 1 - 400");
         }
 
         if (type == null) {
@@ -76,8 +80,8 @@ public class Pokemon {
     }
 
     public void setMaxHP(int maxHP) {
-        if (maxHP < 1 || maxHP > 500) {
-            throw new IllegalArgumentException("Max HP måste vara mellan 1 - 500");
+        if (maxHP < MIN_HP || maxHP > MAX_HP) {
+            throw new IllegalArgumentException("Max HP måste vara mellan 1 - 400");
         }
 
         this.maxHP = maxHP;

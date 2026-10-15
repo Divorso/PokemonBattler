@@ -24,14 +24,14 @@ public class Main {
             System.out.println("7) Radera nuvarande Pokemon och ladda in seed data");
             System.out.println("8) Spara och avsluta spelet");
             System.out.println("9) Spela Pokemon-Battler");
-            int userChoice = ErrorHandelingService.checkIntMinMax(scanner,1,9);
+            int userChoice = ValidationService.checkIntMinMax(scanner,1,9);
 
             switch (userChoice) {
                 case 1 -> {
                     graphics.getEmptySpace(20);
                     graphics.getMessage("Här är alla dina Pokemon");
                     pokedexService.showAllPokemon(pokemonArray,"all");
-                    ErrorHandelingService.getReturnInMenu(scanner);
+                    ValidationService.getReturnInMenu(scanner);
                     graphics.getEmptySpace(20);
                 }
                 case 2 -> {
@@ -52,20 +52,20 @@ public class Main {
                     graphics.getEmptySpace(20);
                     FileHandler.savePokemons(pokemonArray);
                     graphics.getMessage("Spara Pokemon");
-                    ErrorHandelingService.getReturnInMenu(scanner);
+                    ValidationService.getReturnInMenu(scanner);
                 }
                 case 6 -> {
                     graphics.getEmptySpace(20);
                     pokemonArray = FileHandler.loadPokemons();
                     graphics.getMessage("Laddar från tidigare fil");
-                    ErrorHandelingService.getReturnInMenu(scanner);
+                    ValidationService.getReturnInMenu(scanner);
                 }
                 case 7 -> {
                     graphics.getEmptySpace(20);
                     pokemonArray.clear();
                     PokedexServices.seedPokemon(pokemonArray);
                     graphics.getMessage("Dina Pokemon är borttagna & ersatt med seed Pokemon");
-                    ErrorHandelingService.getReturnInMenu(scanner);
+                    ValidationService.getReturnInMenu(scanner);
                 }
                 case 8 -> {
                     graphics.getEmptySpace(20);

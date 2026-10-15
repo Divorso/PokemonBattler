@@ -27,7 +27,7 @@ public class BattleService {
 
             pokedexServices.showAllPokemon(pokemonArray, "battle");
             System.out.println("Välj en Pokemon");
-            String choicePokemon = ErrorHandelingService.checkForPokemon(scanner, pokemonArray);
+            String choicePokemon = ValidationService.checkForPokemon(scanner, pokemonArray);
             if (choicePokemon.equalsIgnoreCase("b")) return;
 
             for (Pokemon pokemon : pokemonArray) {
