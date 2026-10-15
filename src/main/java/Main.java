@@ -28,47 +28,47 @@ public class Main {
 
             switch (userChoice) {
                 case 1 -> {
-                    graphics.getEmptySpace(20);
+                    graphics.getEmptySpace(40);
                     graphics.getMessage("Här är alla dina Pokemon");
                     pokedexService.showAllPokemon(pokemonArray,"all");
                     ValidationService.getReturnInMenu(scanner);
-                    graphics.getEmptySpace(20);
+                    graphics.getEmptySpace(40);
                 }
                 case 2 -> {
-                    graphics.getEmptySpace(20);
+                    graphics.getEmptySpace(40);
                     pokedexService.addPokemon(pokemonArray, scanner);
                 }
                 case 3 -> {
-                    graphics.getEmptySpace(20);
+                    graphics.getEmptySpace(40);
                     graphics.getMessage("Ta bort Pokemon");
                     pokedexService.removePokemon(scanner, pokemonArray);
                 }
                 case 4 -> {
-                    graphics.getEmptySpace(20);
+                    graphics.getEmptySpace(40);
                     graphics.getMessage("Uppdatera Pokemon");
                     pokedexService.updatePokemon(scanner,pokemonArray);
                 }
                 case 5 -> {
-                    graphics.getEmptySpace(20);
+                    graphics.getEmptySpace(40);
                     FileHandler.savePokemons(pokemonArray);
                     graphics.getMessage("Spara Pokemon");
                     ValidationService.getReturnInMenu(scanner);
                 }
                 case 6 -> {
-                    graphics.getEmptySpace(20);
+                    graphics.getEmptySpace(40);
                     pokemonArray = FileHandler.loadPokemons();
                     graphics.getMessage("Laddar från tidigare fil");
                     ValidationService.getReturnInMenu(scanner);
                 }
                 case 7 -> {
-                    graphics.getEmptySpace(20);
+                    graphics.getEmptySpace(40);
                     pokemonArray.clear();
                     PokedexServices.seedPokemon(pokemonArray);
                     graphics.getMessage("Dina Pokemon är borttagna & ersatt med seed Pokemon");
                     ValidationService.getReturnInMenu(scanner);
                 }
                 case 8 -> {
-                    graphics.getEmptySpace(20);
+                    graphics.getEmptySpace(40);
                     graphics.getMessage("Tack för att du spelade!");
                     FileHandler.savePokemons(pokemonArray);
                     isRunning = false;

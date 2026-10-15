@@ -24,6 +24,17 @@ public class ValidationService {
             System.out.print("Fel använd endast bokstäver A-Z: ");
         }
     }
+    public static String checkPokemonName(Scanner scanner) {
+        while (true) {
+            String name = checkNameLettersOnly(scanner);
+
+            if (name.length() >= 3) {
+                return name;
+            }
+
+            System.out.print("Pokemon måste ha minst 3 bokstäver. Försök igen: ");
+        }
+    }
     public static Type checkType(Scanner scanner) {
         while(true){
             try {
@@ -69,5 +80,14 @@ public class ValidationService {
             }
             System.out.println("Fel val.");
         }
+    }
+    public static String numberToText(int number){
+        return switch (number){
+            case 0 -> "första";
+            case 1 -> "andra";
+            case 2 -> "tredje";
+            case 3 -> "fjärde";
+            default -> "okänt";
+        };
     }
 }

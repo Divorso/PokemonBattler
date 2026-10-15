@@ -55,4 +55,22 @@ public class Graphics implements GraphicsSelector{
             }
 
         }
+
+        @Override
+        public void getLoadingTimer(int number){
+            System.out.print("Loading -> ");
+            for (int i = number; i > 0; i--) {
+                try {
+                    Thread.sleep(250);
+                    System.out.print("◓ ");
+                    Thread.sleep(250);
+                    System.out.print("◒ ");
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    return;
+                }
+            }
+            getEmptySpace(50);
+
+        }
 }

@@ -3,4 +3,5 @@ public interface GraphicsSelector {
     void getPokedexIntro(String message);
     void getBattleIntro(String message);
     void getEmptySpace(int number);
+    void getLoadingTimer(int number);
 }

@@ -8,6 +8,9 @@ public class Attack {
     public static final int MIN_ACCURACY = 1;
     public static final int MAX_ACCURACY = 100;
 
+    public static final int MIN_ATTACKS = 1;
+    public static final int MAX_ATTACKS = 4;
+
     private String attackName;
     private int baseDamage;
     private int accuracy;

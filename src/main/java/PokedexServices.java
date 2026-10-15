@@ -44,13 +44,14 @@ public class PokedexServices {
         }
     }
     public void addPokemon(ArrayList<Pokemon> pokemonArray, Scanner scanner){
+        graphics.getLoadingTimer(6);
         graphics.getMessage("Lägg till Pokemon i din Pokeindex");
 
         System.out.print("----Vad ska din Pokemon heta----: ");
-        String name = ValidationService.checkNameLettersOnly(scanner);
+        String name = ValidationService.checkPokemonName(scanner);
 
         System.out.println("----Vad är maxHP på din Pokemon----");
-        System.out.print("----(1-400)----: ");
+        System.out.printf("----(%d-%d)----: \n",Pokemon.MIN_HP,Pokemon.MAX_HP);
         int maxHP = ValidationService.checkIntMinMax(scanner,Pokemon.MIN_HP,Pokemon.MAX_HP);
 
         System.out.println("--Vad är din Pokemon för typ välj mellan--");
@@ -60,30 +61,21 @@ public class PokedexServices {
 
         System.out.println("----Hur många attacker har din Pokemon?----");
         System.out.print("----(Du får ha mellan 1-4 attacker)----: ");
-        int amountAttacks = ValidationService.checkIntMinMax(scanner,1,4 );
+        int amountAttacks = ValidationService.checkIntMinMax(scanner,Attack.MIN_ATTACKS,Attack.MAX_ATTACKS );
         ArrayList<Attack> attackArray = new ArrayList<>();
 
 
         for(int i = 0; i < amountAttacks; i++ ){
-            graphics.getEmptySpace(25);
+            graphics.getEmptySpace(40);
             graphics.getMessage("Lägg till Attack");
 
-            String numberToText = "";
-            switch (i){
-                case 0 -> numberToText = "första";
-                case 1 -> numberToText = "andra";
-                case 2 -> numberToText = "tredje";
-                case 3 -> numberToText = "fjärde";
-            }
-
-
-            System.out.printf("Vad heter %s attacken: ", numberToText);
+            System.out.printf("\nVad heter %s attacken: ", ValidationService.numberToText(i));
             String attackName = ValidationService.checkNameLettersOnly(scanner);
 
-            System.out.print("Hur mycket skada gör den (1-40): ");
+            System.out.printf("\nHur mycket skada gör den (%d-%d):",Attack.MIN_DAMAGE,Attack.MAX_DAMAGE);
             int attackDamage = ValidationService.checkIntMinMax(scanner,Attack.MIN_DAMAGE,Attack.MAX_DAMAGE);
 
-            System.out.print("Hur träffsäker är den (1-100): ");
+            System.out.printf("\nHur träffsäker är den (%d-%d): \n",Attack.MIN_ACCURACY,Attack.MAX_ACCURACY);
             int accuracy = ValidationService.checkIntMinMax(scanner,Attack.MIN_ACCURACY,Attack.MAX_ACCURACY);
 
             System.out.println("Vad är det för typ av attack?");
@@ -104,9 +96,12 @@ public class PokedexServices {
             ValidationService.getReturnInMenu(scanner);
         } else {
             showAllPokemon(pokemonArray, "name");
-            System.out.println("Vilken Pokemon vill du ta bort?");
-            System.out.println("Skriv B för att backa");
+            System.out.println("""
+                    Vilken Pokemon vill du ta bort?
+                    Skriv B för att backa
+                    """);
             System.out.print("Pokemon: ");
+
             String pokemonToRemove = ValidationService.checkForPokemon(scanner,pokemonArray);
             if(!pokemonToRemove.equalsIgnoreCase("b")){
                 for (int i = 0; i < pokemonArray.size(); i++) {

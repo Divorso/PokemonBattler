@@ -38,6 +38,7 @@ public class Pokemon {
         if (attacks == null || attacks.isEmpty() || attacks.size() > 4) {
             throw new IllegalArgumentException("Pokemon måste ha 1-4 attacker");
         }
+        setName(name);
 
         this.name = name;
         this.maxHP = maxHP;
@@ -68,8 +69,8 @@ public class Pokemon {
     }
 
     public void setName(String name) {
-        if (name == null || name.isBlank()) {
-            throw new IllegalArgumentException("Pokemon måste ha ett namn");
+        if (name == null || name.isBlank() || name.length() <= 3) {
+            throw new IllegalArgumentException("Pokemon måste ha ett namn och vara minst 3 bokstäver");
         }
 
         this.name = name;
