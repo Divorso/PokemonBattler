@@ -3,10 +3,13 @@ import java.util.Scanner;
 
 public class BattleService {
     public static void StartBattle(ArrayList<Pokemon> pokemonArray, Scanner scanner) {
+        PokedexServices pokedexServices = new PokedexServices();
+        GraphicsSelector graphics = new Graphics();
         BattleStatistics statistics = FileHandler.loadBattleStatistics();
         AttackSelector playerSelector = new PlayerAttackSelector(scanner);
         AttackSelector cpuSelector = new CPUAttackSelector();
-
+        graphics.getEmptySpace(20);
+        graphics.getBattleIntro("Välkommen till din Pokemon Battler");
         while (true) {
             if (pokemonArray.isEmpty()) {
                 System.out.println("Du har inga Pokemon.");
@@ -22,7 +25,7 @@ public class BattleService {
             Pokemon playerPokemon = null;
 
 
-            PokedexServices.showAllPokemon(pokemonArray, "battle");
+            pokedexServices.showAllPokemon(pokemonArray, "battle");
             System.out.println("Välj en Pokemon");
             String choicePokemon = ErrorHandelingService.checkForPokemon(scanner, pokemonArray);
             if (choicePokemon.equalsIgnoreCase("b")) return;
@@ -43,16 +46,13 @@ public class BattleService {
                 continue;
             }
             if (playerPokemon.isDefeated()) {
-                System.out.println("Din Pokémon har 0 HP och kan inte strida.");
+                System.out.printf("%s har svimmat och kan inte strida.\n",playerPokemon.getName());
                 continue;
             }
-
+            graphics.getEmptySpace(20);
             System.out.println("Du kommer möta CPU pokemon: " + cpuPokemon.getName());
             System.out.println("Du har valt: " + playerPokemon.getName());
             System.out.println("Högst roll börjar striden");
-
-            playerPokemon.resetHP();
-            cpuPokemon.resetHP();
 
             int playerRoll = (int) (Math.random() * 100) + 1;
             int cpuRoll = (int) (Math.random() * 100) + 1;
@@ -114,7 +114,7 @@ public class BattleService {
                 break;
             }
 
-
+            graphics.getEmptySpace(20);
         }
     }
 }

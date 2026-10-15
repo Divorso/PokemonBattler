@@ -8,56 +8,68 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Pokemon> pokemonArray = FileHandler.loadPokemons();
         PokedexServices.seedPokemon(pokemonArray);
+        GraphicsSelector graphics = new Graphics();
+        PokedexServices pokedexService = new PokedexServices();
 
         boolean isRunning = true;
         while (isRunning){
-            Graphics.getIntroGraphics();
-            Graphics.getUserOptionsGraphics();
+            graphics.getPokedexIntro("Välkommen till din PokeIndex");
+            System.out.println("Välj en av följande: ");
+            System.out.println("1) Visa alla Pokemon");
+            System.out.println("2) Lägg till en Pokemon");
+            System.out.println("3) Ta bort en Pokemon");
+            System.out.println("4) Uppdatera en pokemon");
+            System.out.println("5) Spara data");
+            System.out.println("6) Ladda data");
+            System.out.println("7) Radera nuvarande Pokemon och ladda in seed data");
+            System.out.println("8) Spara och avsluta spelet");
+            System.out.println("9) Spela Pokemon-Battler");
             int userChoice = ErrorHandelingService.checkIntMinMax(scanner,1,9);
+
             switch (userChoice) {
                 case 1 -> {
-                    Graphics.getEmptySpace(20);
-                    Graphics.getPokemonListGraphics();
-                    PokedexServices.showAllPokemon(pokemonArray,"all");
+                    graphics.getEmptySpace(20);
+                    graphics.getMessage("Här är alla dina Pokemon");
+                    pokedexService.showAllPokemon(pokemonArray,"all");
                     Graphics.getReturnInMenu(scanner);
-                    Graphics.getEmptySpace(20);
+                    graphics.getEmptySpace(20);
                 }
                 case 2 -> {
-                    Graphics.getEmptySpace(20);
-                    PokedexServices.addPokemon(pokemonArray, scanner);
+                    graphics.getEmptySpace(20);
+                    pokedexService.addPokemon(pokemonArray, scanner);
                 }
                 case 3 -> {
-                    Graphics.getEmptySpace(20);
-                    Graphics.getRemovePokemonGraphics();
-                    PokedexServices.removePokemon(scanner, pokemonArray);
+                    graphics.getEmptySpace(20);
+                    graphics.getMessage("Ta bort Pokemon");
+                    pokedexService.removePokemon(scanner, pokemonArray);
                 }
                 case 4 -> {
-                    Graphics.getEmptySpace(20);
-                    Graphics.getUpdatePokemonGraphics();
-                    PokedexServices.updatePokemon(scanner,pokemonArray);
+                    graphics.getEmptySpace(20);
+                    graphics.getMessage("Uppdatera Pokemon");
+                    pokedexService.updatePokemon(scanner,pokemonArray);
                 }
                 case 5 -> {
-                    Graphics.getEmptySpace(20);
+                    graphics.getEmptySpace(20);
                     FileHandler.savePokemons(pokemonArray);
-                    Graphics.getSavedPokemon();
+                    graphics.getMessage("Spara Pokemon");
                     Graphics.getReturnInMenu(scanner);
                 }
                 case 6 -> {
-                    Graphics.getEmptySpace(20);
+                    graphics.getEmptySpace(20);
                     pokemonArray = FileHandler.loadPokemons();
-                    Graphics.getLoadGraphics();
+                    graphics.getMessage("Laddar från tidigare fil");
                     Graphics.getReturnInMenu(scanner);
                 }
                 case 7 -> {
-                    Graphics.getEmptySpace(20);
+                    graphics.getEmptySpace(20);
                     pokemonArray.clear();
                     PokedexServices.seedPokemon(pokemonArray);
-                    Graphics.getResetToSeedGraphics();
+                    graphics.getMessage("Dina Pokemon är borttagna & ersatt med seed Pokemon");
                     Graphics.getReturnInMenu(scanner);
                 }
                 case 8 -> {
-                    Graphics.getEmptySpace(20);
-                    Graphics.getQuitGameGraphics();
+                    graphics.getEmptySpace(20);
+                    graphics.getMessage("Tack för att du spelade!");
                     FileHandler.savePokemons(pokemonArray);
                     isRunning = false;
                 }

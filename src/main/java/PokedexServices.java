@@ -3,7 +3,8 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class PokedexServices {
-    public static void showAllPokemon(ArrayList<Pokemon> pokemonArray, String choice){
+    GraphicsSelector graphics = new Graphics();
+    public void showAllPokemon(ArrayList<Pokemon> pokemonArray, String choice){
         if(pokemonArray.isEmpty()){
             System.out.println("Du har inga Pokemon");
         } else {
@@ -22,13 +23,17 @@ public class PokedexServices {
                                     attack.getType()
                             );
                         }
-                        Graphics.getEmptySpace(2);
+                        graphics.getEmptySpace(2);
                     }
 
                 }
                 case "battle" -> {
                     for(Pokemon pokemon : pokemonArray){
-                        System.out.printf("Namn: %s , NuvarandeHP: %s \n", pokemon.getName(),pokemon.getCurrentHP());
+                        if (pokemon.isDefeated()){
+                            System.out.printf("Namn: %s är besegrad\n",pokemon.getName());
+                        } else {
+                            System.out.printf("Namn: %s , NuvarandeHP: %s\n", pokemon.getName(),pokemon.getCurrentHP());
+                        }
                     }
                 }
                 case "name" -> {
@@ -39,8 +44,8 @@ public class PokedexServices {
             }
         }
     }
-    public static void addPokemon(ArrayList<Pokemon> pokemonArray, Scanner scanner){
-        Graphics.getAddPokemonGraphics();
+    public void addPokemon(ArrayList<Pokemon> pokemonArray, Scanner scanner){
+        graphics.getMessage("Lägg till Pokemon i din Pokeindex");
 
         System.out.print("----Vad ska din Pokemon heta----: ");
         String name = ErrorHandelingService.checkNameLettersOnly(scanner);
@@ -61,8 +66,8 @@ public class PokedexServices {
 
 
         for(int i = 0; i < amountAttacks; i++ ){
-            Graphics.getEmptySpace(25);
-            Graphics.getAttackGraphics();
+            graphics.getEmptySpace(25);
+            graphics.getMessage("Lägg till Attack");
 
             String numberToText = "";
             switch (i){
@@ -92,9 +97,9 @@ public class PokedexServices {
         }
         Pokemon newPokemon = new Pokemon(name, maxHP, type,attackArray);
         pokemonArray.add(newPokemon);
-        Graphics.getPokemonCreatedGraphics();
+        graphics.getMessage("Din Pokemon är nu skapad");
     }
-    public static void removePokemon(Scanner scanner, ArrayList<Pokemon> pokemonArray){
+    public void removePokemon(Scanner scanner, ArrayList<Pokemon> pokemonArray){
         if(pokemonArray.isEmpty()){
             System.out.println("Du har inga Pokemon att ta bort");
             Graphics.getReturnInMenu(scanner);
@@ -126,7 +131,7 @@ public class PokedexServices {
 
 
     }
-    public static void updatePokemon(Scanner scanner, ArrayList<Pokemon> pokemonArray){
+    public void updatePokemon(Scanner scanner, ArrayList<Pokemon> pokemonArray){
         showAllPokemon(pokemonArray,"name");
 
         System.out.print("Vilken Pokemon vill du uppdatera: ");
@@ -165,8 +170,8 @@ public class PokedexServices {
                             case 1 -> {
                                 for (int y = 0; y < pokemon.getAttacks().size(); y++) {
 
-                                    Graphics.getEmptySpace(20);
-                                    Graphics.getUpdatedAttackGraphics();
+                                    graphics.getEmptySpace(20);
+                                    graphics.getMessage("Uppdatera din Pokemon");
 
                                     String numberToText = "";
 
@@ -214,8 +219,8 @@ public class PokedexServices {
                                     int userChoiceAttacks = ErrorHandelingService.checkIntMinMax(scanner, 1, availableSlots);
 
                                     for (int iAttack = 0; iAttack < userChoiceAttacks; iAttack++) {
-                                        Graphics.getEmptySpace(20);
-                                        Graphics.getAttackGraphics();
+                                        graphics.getEmptySpace(20);
+                                        graphics.getMessage("Lägg till Attack");
 
                                         System.out.print("Vad heter attacken: ");
                                         String attackName = ErrorHandelingService.checkNameLettersOnly(scanner);
@@ -236,8 +241,8 @@ public class PokedexServices {
                                 }
                             }
                             case 3 -> {
-                                Graphics.getEmptySpace(20);
-                                Graphics.getAttackRemoveGraphics();
+                                graphics.getEmptySpace(20);
+                                graphics.getMessage("Ta bort attack");
 
                                 if (pokemon.getAttacks().size() <= 1) {
                                     System.out.println("Pokemon måste ha minst 1 attack!");
