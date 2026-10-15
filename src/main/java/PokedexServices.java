@@ -102,7 +102,7 @@ public class PokedexServices {
     public void removePokemon(Scanner scanner, ArrayList<Pokemon> pokemonArray){
         if(pokemonArray.isEmpty()){
             System.out.println("Du har inga Pokemon att ta bort");
-            Graphics.getReturnInMenu(scanner);
+            ErrorHandelingService.getReturnInMenu(scanner);
         } else {
             showAllPokemon(pokemonArray, "name");
             System.out.println("Vilken Pokemon vill du ta bort?");

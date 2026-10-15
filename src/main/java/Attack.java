@@ -20,7 +20,7 @@ public class Attack {
         }
 
         if (baseDamage < 1 || baseDamage > 50) {
-            throw new IllegalArgumentException("Base damage måste vara mellan 1 - 40");
+            throw new IllegalArgumentException("Base damage måste vara mellan 1 - 50");
         }
 
         if (accuracy < 1 || accuracy > 100) {

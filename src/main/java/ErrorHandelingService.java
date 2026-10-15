@@ -58,4 +58,16 @@ public class ErrorHandelingService {
             }
         }
     }
+    public static boolean getReturnInMenu(Scanner scanner) {
+
+        while (true) {
+            System.out.print("Skriv B för att backa: ");
+            String input = scanner.nextLine();
+
+            if (input.equalsIgnoreCase("b")) {
+                return true;
+            }
+            System.out.println("Fel val.");
+        }
+    }
 }

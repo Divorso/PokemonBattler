@@ -31,7 +31,7 @@ public class Main {
                     graphics.getEmptySpace(20);
                     graphics.getMessage("Här är alla dina Pokemon");
                     pokedexService.showAllPokemon(pokemonArray,"all");
-                    Graphics.getReturnInMenu(scanner);
+                    ErrorHandelingService.getReturnInMenu(scanner);
                     graphics.getEmptySpace(20);
                 }
                 case 2 -> {
@@ -52,20 +52,20 @@ public class Main {
                     graphics.getEmptySpace(20);
                     FileHandler.savePokemons(pokemonArray);
                     graphics.getMessage("Spara Pokemon");
-                    Graphics.getReturnInMenu(scanner);
+                    ErrorHandelingService.getReturnInMenu(scanner);
                 }
                 case 6 -> {
                     graphics.getEmptySpace(20);
                     pokemonArray = FileHandler.loadPokemons();
                     graphics.getMessage("Laddar från tidigare fil");
-                    Graphics.getReturnInMenu(scanner);
+                    ErrorHandelingService.getReturnInMenu(scanner);
                 }
                 case 7 -> {
                     graphics.getEmptySpace(20);
                     pokemonArray.clear();
                     PokedexServices.seedPokemon(pokemonArray);
                     graphics.getMessage("Dina Pokemon är borttagna & ersatt med seed Pokemon");
-                    Graphics.getReturnInMenu(scanner);
+                    ErrorHandelingService.getReturnInMenu(scanner);
                 }
                 case 8 -> {
                     graphics.getEmptySpace(20);
