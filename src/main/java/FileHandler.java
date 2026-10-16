@@ -51,15 +51,16 @@ public class FileHandler {
     public static BattleStatistics loadBattleStatistics(){
         ObjectMapper mapper = new ObjectMapper();
         if(!BATTLEFILE.exists() || BATTLEFILE.length() == 0){
-            return new BattleStatistics(0,0);
+            return new BattleStatistics(0, 0, null, null,null,null);
         }
 
         try {
             return mapper.readValue(BATTLEFILE, BattleStatistics.class);
         } catch (IOException e){
             System.out.println("Kunde ej läsa statistiken " + e);
-            return new BattleStatistics(0,0);
+            return new BattleStatistics(0, 0, null, null,null,null);
         }
 
     }
+
 }

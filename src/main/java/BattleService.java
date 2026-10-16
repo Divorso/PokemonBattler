@@ -9,9 +9,11 @@ public class BattleService {
         AttackSelector playerSelector = new PlayerAttackSelector(scanner);
         AttackSelector cpuSelector = new CPUAttackSelector();
 
-        graphics.getEmptySpace(40);
+        graphics.getEmptySpace(80);
         graphics.getBattleIntro("Välkommen till din Pokemon Battler");
         statistics.showStatistics();
+        System.out.println("=".repeat(80));
+        statistics.showMostUsed();
         System.out.println("=".repeat(80));
         while (true) {
             if (pokemonArray.isEmpty()) {
@@ -74,10 +76,16 @@ public class BattleService {
                 System.out.println("Spelet är avbryten");
                 continue;
             }
+            statistics.addPokemonUsage(playerPokemon.getName());
 
             int round = 1;
             graphics.getEmptySpace(50);
             boolean starter = whoWillStart(graphics);
+            Pokemon firstPokemon = starter ? playerPokemon : cpuPokemon;
+            Pokemon secondPokemon = starter ? cpuPokemon : playerPokemon;
+
+            AttackSelector firstSelector = starter ? playerSelector : cpuSelector;
+            AttackSelector secondSelector = starter ? cpuSelector : playerSelector;
             while (!playerPokemon.isDefeated() && !cpuPokemon.isDefeated()) {
                 graphics.getMessage("Runda: " + round);
                 round++;
@@ -85,28 +93,27 @@ public class BattleService {
                 System.out.printf("CPU HP: %d\n", cpuPokemon.getCurrentHP());
                 System.out.println("=".repeat(80));
 
-                Pokemon firstPokemon = starter ? playerPokemon : cpuPokemon;
-                Pokemon secondPokemon = starter ? cpuPokemon : playerPokemon;
+                executeTurn(firstPokemon, secondPokemon, firstSelector,
+                        statistics, firstPokemon == playerPokemon);
 
-                AttackSelector firstSelector = starter ? playerSelector : cpuSelector;
-                AttackSelector secondSelector = starter ? cpuSelector : playerSelector;
-
-                executeTurn(firstPokemon, secondPokemon, firstSelector);
                 if (!secondPokemon.isDefeated()) {
-                    executeTurn(secondPokemon, firstPokemon, secondSelector);
+                    executeTurn(secondPokemon, firstPokemon, secondSelector,
+                            statistics, secondPokemon == playerPokemon);
                 }
                 System.out.println("#".repeat(80));
                 System.out.println("#".repeat(80));
             }
             if (cpuPokemon.isDefeated()) {
                 System.out.println("Du vann!");
-                statistics.addPlayerWin();
+                statistics.addPlayerWin(playerPokemon.getName());
+
             } else if (playerPokemon.isDefeated()) {
                 System.out.println("Du förlorade!");
-                statistics.addCpuWin();
+                statistics.addCpuWin(playerPokemon.getName());
             }
             statistics.showStatistics();
             FileHandler.saveBattleStatistics(statistics);
+            statistics.showMostUsed();
             System.out.print("""
                     Spela vidare?
                     1) - Forsätt
@@ -151,9 +158,17 @@ public class BattleService {
 
         return playerFirst;
     }
-    private static void executeTurn(Pokemon attacker, Pokemon defender, AttackSelector selector) {
+    private static void executeTurn(Pokemon attacker, Pokemon defender,
+                                    AttackSelector selector,
+                                    BattleStatistics statistics,
+                                    boolean isPlayer) {
 
         Attack attack = selector.chooseAttack(attacker);
+
+        if (isPlayer) {
+            statistics.addAttackUsage(attack.getAttackName());
+        }
+
         DamageCalculator.performAttack(attacker, defender, attack);
     }
 }
