@@ -13,20 +13,23 @@ public class FileHandler {
     private static final File BATTLEFILE =
             new File("src/main/resources/BattleStatistic.json");
 
-    public static ArrayList<Pokemon> loadPokemons() throws IOException {
-
+    public static ArrayList<Pokemon> loadPokemons() {
         ObjectMapper mapper = new ObjectMapper();
         if (!FILE.exists() || FILE.length() == 0) {
             return new ArrayList<>();
         }
+        try {
+            return mapper.readValue(FILE, new TypeReference<ArrayList<Pokemon>>() {}
+            );
 
-        ArrayList<Pokemon> pokemons = mapper.readValue(
-                FILE,
-                new TypeReference<ArrayList<Pokemon>>() {}
-        );
+        } catch (IOException e) {
+            System.out.println("Kunde inte läsa Pokemon-filen.");
+            System.out.println("Filen innehåller ogiltig data: " + e.getMessage());
 
-        return pokemons;
+            return new ArrayList<>();
+        }
     }
+
 
     public static void savePokemons(ArrayList<Pokemon> pokemonArray) throws IOException {
 
@@ -62,5 +65,6 @@ public class FileHandler {
         }
 
     }
+
 
 }
