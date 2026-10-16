@@ -11,8 +11,8 @@ public class Main {
         GraphicsSelector graphics = new Graphics();
         PokedexServices pokedexService = new PokedexServices();
 
-        boolean isRunning = true;
-        while (isRunning){
+        while (true){
+            graphics.getEmptySpace(40);
             graphics.getPokedexIntro("Välkommen till din PokeIndex");
             System.out.println("Välj en av följande: ");
             System.out.println("1) Visa alla Pokemon");
@@ -45,7 +45,6 @@ public class Main {
                 }
                 case 4 -> {
                     graphics.getEmptySpace(40);
-                    graphics.getMessage("Uppdatera Pokemon");
                     pokedexService.updatePokemon(scanner,pokemonArray);
                 }
                 case 5 -> {
@@ -71,7 +70,8 @@ public class Main {
                     graphics.getEmptySpace(40);
                     graphics.getMessage("Tack för att du spelade!");
                     FileHandler.savePokemons(pokemonArray);
-                    isRunning = false;
+                    scanner.close();
+                    return;
                 }
                 case 9 ->{
                     BattleService.StartBattle(pokemonArray,scanner);
@@ -79,6 +79,5 @@ public class Main {
             }
 
         }
-        scanner.close();
     }
 }

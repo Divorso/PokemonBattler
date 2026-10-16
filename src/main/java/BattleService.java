@@ -8,7 +8,9 @@ public class BattleService {
         BattleStatistics statistics = FileHandler.loadBattleStatistics();
         AttackSelector playerSelector = new PlayerAttackSelector(scanner);
         AttackSelector cpuSelector = new CPUAttackSelector();
-        graphics.getEmptySpace(20);
+
+        graphics.getEmptySpace(40);
+        graphics.getLoadingTimer(6);
         graphics.getBattleIntro("Välkommen till din Pokemon Battler");
         while (true) {
             if (pokemonArray.isEmpty()) {

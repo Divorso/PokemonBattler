@@ -69,7 +69,7 @@ public class Pokemon {
     }
 
     public void setName(String name) {
-        if (name == null || name.isBlank() || name.length() <= 3) {
+        if (name == null || name.isBlank() || name.length() < 3) {
             throw new IllegalArgumentException("Pokemon måste ha ett namn och vara minst 3 bokstäver");
         }
 

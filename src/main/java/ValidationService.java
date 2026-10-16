@@ -90,4 +90,16 @@ public class ValidationService {
             default -> "okänt";
         };
     }
+    public static String checkAttackName(Scanner scanner) {
+
+        while (true) {
+            String attackName = scanner.nextLine().trim();
+
+            if (attackName.length() >= 3 && attackName.matches("[a-zA-Z ]+")) {
+                return attackName;
+            }
+
+            System.out.print("Attackens namn måste ha minst 3 bokstäver. Försök igen: ");
+        }
+    }
 }
