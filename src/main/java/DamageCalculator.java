@@ -11,7 +11,13 @@ public class DamageCalculator {
 
         double randomMultiplier = 0.5 + Math.random() * 0.5;
         double typeMultiplier = getTypeMultiplier(attack.getType(), defender.getType());
-        double damage = attack.getBaseDamage() * randomMultiplier * typeMultiplier;
+        boolean criticalHit = (int) (Math.random() * 10) == 0;
+        double criticalMultiplier = criticalHit ? 2.0 : 1.0;
+
+        double damage = attack.getBaseDamage() * randomMultiplier * typeMultiplier * criticalMultiplier;
+        if (criticalHit) {
+            System.out.println("CRITICAL HIT! 2x skada!!");
+        }
 
         if (typeMultiplier == 2) {
             System.out.println("Effektiv skada!!");
