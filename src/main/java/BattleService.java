@@ -1,8 +1,10 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.NoSuchElementException;
 
 public class BattleService {
     public static void StartBattle(ArrayList<Pokemon> pokemonArray, Scanner scanner) {
+        try {
         PokedexServices pokedexServices = new PokedexServices();
         GraphicsSelector graphics = new Graphics();
         BattleStatistics statistics = FileHandler.loadBattleStatistics();
@@ -125,6 +127,9 @@ public class BattleService {
                 System.out.println("Tack för att du spelade! ");
                 break;
             }
+        }
+        }catch (NoSuchElementException e) {
+            System.out.println("Inmatningen avbröts. Spelet avslutas.");
         }
     }
     private static boolean whoWillStart(GraphicsSelector graphics) {

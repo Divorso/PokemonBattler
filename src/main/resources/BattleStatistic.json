@@ -1,20 +1,22 @@
 {
   "playerWins" : 17,
-  "cpuWins" : 10,
+  "cpuWins" : 11,
   "pokemonWins" : {
     "Pikachu" : 1,
     "Charmander" : 1,
     "Eevee" : 1
   },
   "pokemonLosses" : {
-    "Squirtle" : 1
+    "Squirtle" : 1,
+    "Eevee" : 1
   },
   "pokemonUsage" : {
     "Pikachu" : 1,
-    "Eevee" : 1
+    "Eevee" : 2
   },
   "attackUsage" : {
-    "Quick Attack" : 7,
+    "Quick Attack" : 8,
+    "Tackle" : 2,
     "Thunder Shock" : 1
   }
 }
