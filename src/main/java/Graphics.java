@@ -57,8 +57,13 @@ public class Graphics implements GraphicsSelector{
         }
 
         @Override
-        public void getLoadingTimer(int number){
-            System.out.print("Loading -> ");
+        public void getLoadingTimer(int number) {
+            getLoadingTimer(number, "Loading");
+        }
+
+        public void getLoadingTimer(int number, String message) {
+            System.out.print(message + " -> ");
+
             for (int i = number; i > 0; i--) {
                 try {
                     Thread.sleep(250);
@@ -70,7 +75,5 @@ public class Graphics implements GraphicsSelector{
                     return;
                 }
             }
-            getEmptySpace(50);
-
         }
 }

@@ -10,8 +10,9 @@ public class BattleService {
         AttackSelector cpuSelector = new CPUAttackSelector();
 
         graphics.getEmptySpace(40);
-        graphics.getLoadingTimer(6);
         graphics.getBattleIntro("Välkommen till din Pokemon Battler");
+        statistics.showStatistics();
+        System.out.println("=".repeat(80));
         while (true) {
             if (pokemonArray.isEmpty()) {
                 System.out.println("Du har inga Pokemon.");
@@ -48,26 +49,32 @@ public class BattleService {
                 continue;
             }
             if (playerPokemon.isDefeated()) {
-                System.out.printf("%s har svimmat och kan inte strida.\n",playerPokemon.getName());
+                System.out.printf("%s har svimmat och kan inte strida.\n", playerPokemon.getName());
                 continue;
             }
-            graphics.getEmptySpace(20);
-            System.out.println("Du kommer möta CPU pokemon: " + cpuPokemon.getName());
-            System.out.println("Du har valt: " + playerPokemon.getName());
-            System.out.println("Högst roll börjar striden");
+            graphics.getEmptySpace(50);
+            graphics.getMessage(cpuPokemon.getName() + " VS " + playerPokemon.getName());
+            System.out.println("CPU: " + cpuPokemon.getName());
+            System.out.println("Spelare: " + playerPokemon.getName());
+            System.out.println("=".repeat(80));
+            graphics.getMessage("Högst roll börjar striden");
 
             int playerRoll = (int) (Math.random() * 100) + 1;
             int cpuRoll = (int) (Math.random() * 100) + 1;
             boolean playerFirst = playerRoll >= cpuRoll;
 
-            System.out.println("Player rolled: " + playerRoll);
+            graphics.getLoadingTimer(6, "Rolling dices");
+            System.out.println("\nPlayer rolled: " + playerRoll);
             System.out.println("CPU rolled: " + cpuRoll);
+            System.out.println("=".repeat(80));
+            System.out.println("");
             if (playerFirst) {
                 System.out.println("Player börjar!");
             } else {
                 System.out.println("Cpu börjar!");
             }
-
+            System.out.println("");
+            System.out.println("=".repeat(80));
             System.out.println("Redo att starta striden?: y/n");
             String userChoice = scanner.nextLine();
             if (!userChoice.equalsIgnoreCase("y")) {
@@ -76,47 +83,51 @@ public class BattleService {
             }
 
             int round = 1;
-
+            graphics.getEmptySpace(50);
             while (!playerPokemon.isDefeated() && !cpuPokemon.isDefeated()) {
-                System.out.println("Nuvarande runda: " + round);
+                graphics.getMessage("Runda: " + round);
                 System.out.printf("Player HP: %d\n", playerPokemon.getCurrentHP());
                 System.out.printf("CPU HP: %d\n", cpuPokemon.getCurrentHP());
+                System.out.println("=".repeat(80));
 
                 if (playerFirst) {
                     Attack playerAttack = playerSelector.chooseAttack(playerPokemon);
+                    System.out.println("=".repeat(80));
                     DamageCalculator.performAttack(playerPokemon, cpuPokemon, playerAttack);
-                    if(!cpuPokemon.isDefeated()){
+                    if (!cpuPokemon.isDefeated()) {
                         Attack cpuAttack = cpuSelector.chooseAttack(cpuPokemon);
                         DamageCalculator.performAttack(cpuPokemon, playerPokemon, cpuAttack);
+                        System.out.println("=".repeat(80));
                     }
                 } else {
                     Attack cpuAttack = cpuSelector.chooseAttack(cpuPokemon);
                     DamageCalculator.performAttack(cpuPokemon, playerPokemon, cpuAttack);
-                    if(!playerPokemon.isDefeated()){
+                    System.out.println("=".repeat(80));
+                    if (!playerPokemon.isDefeated()) {
                         Attack playerAttack = playerSelector.chooseAttack(playerPokemon);
                         DamageCalculator.performAttack(playerPokemon, cpuPokemon, playerAttack);
                     }
 
                 }
                 round++;
-                }
-                if (cpuPokemon.isDefeated()) {
-                    System.out.println("Du vann!");
-                    statistics.addPlayerWin();
-                } else if(playerPokemon.isDefeated()) {
-                    System.out.println("Du förlorade!");
-                    statistics.addCpuWin();
-                }
-                statistics.showStatistics();
+                System.out.println("=".repeat(80));
+                graphics.getEmptySpace(2);
+            }
+            if (cpuPokemon.isDefeated()) {
+                System.out.println("Du vann!");
+                statistics.addPlayerWin();
+            } else if (playerPokemon.isDefeated()) {
+                System.out.println("Du förlorade!");
+                statistics.addCpuWin();
+            }
+            statistics.showStatistics();
             FileHandler.saveBattleStatistics(statistics);
             System.out.println("Skriv 'avslut' för att avsluta spelet: ");
             String keepPlaying = scanner.nextLine();
-            if(keepPlaying.equalsIgnoreCase("avslut")){
+            if (keepPlaying.equalsIgnoreCase("avslut")) {
                 System.out.println("Tack för att du spelade! ");
                 break;
             }
-
-            graphics.getEmptySpace(20);
         }
     }
 }

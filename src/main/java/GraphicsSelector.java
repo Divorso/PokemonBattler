@@ -4,4 +4,5 @@ public interface GraphicsSelector {
     void getBattleIntro(String message);
     void getEmptySpace(int number);
     void getLoadingTimer(int number);
+    void getLoadingTimer(int number, String message);
 }

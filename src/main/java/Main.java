@@ -74,6 +74,8 @@ public class Main {
                     return;
                 }
                 case 9 ->{
+                    graphics.getEmptySpace(50);
+                    graphics.getLoadingTimer(6);
                     BattleService.StartBattle(pokemonArray,scanner);
                 }
             }
